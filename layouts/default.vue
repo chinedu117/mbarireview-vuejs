@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app >
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -77,16 +77,22 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-footer
+   
+
+        <app-footer></app-footer>
+    </v-app>
+
+    <!-- <v-footer
       :fixed="fixed"
       app
     >
       <span>&copy; 2019</span>
-    </v-footer>
-  </v-app>
+    </v-footer> -->
+
 </template>
 
 <script>
+import AppFooter from '@/components/AppFooter.vue'
 export default {
   data() {
     return {
@@ -108,8 +114,10 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
+      title: 'Mbari Review'
     }
-  }
+  },
+
+  components: { AppFooter}
 }
 </script>

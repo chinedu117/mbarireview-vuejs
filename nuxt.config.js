@@ -57,7 +57,11 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
   },
-
+  
+  env: {
+    COMPANY_NAME: '"MBARIREVIEW.COM"',
+    CONTACT_EMAIL: "contact@mbarireview.com"
+  },
   /*
   ** Build configuration
   */
