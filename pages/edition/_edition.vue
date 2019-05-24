@@ -15,7 +15,8 @@ export default {
 
    components: { ArticleList }, 
 
- 
+   middleware: ['default-sidebar-items','editions-sidebar-items'],
+
    asyncData(){
 
      return { }
@@ -23,7 +24,6 @@ export default {
    
    async fetch({store,params}){
         
-        await store.dispatch("articles/retrieveEditionList")
         await store.dispatch("articles/retrieveEditionArticles",params.edition)
 
              

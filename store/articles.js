@@ -21,7 +21,8 @@ export const state = () => {
           	  articles: []
           },
           
-          editionList: []
+          editionList: [],
+          categoryList: [],
 
       }
 }
@@ -51,6 +52,10 @@ export const mutations = {
     updateEditionList (state, value) {
             state.editionList.push(value) 
     },
+
+    updateCategoryList (state, value) {
+            state.categoryList.push(value) 
+          },
 }
 
 //store getters
@@ -85,6 +90,12 @@ export const getters = {
       editionList(state) {
      
                  return state.editionList
+     },
+
+
+      categoryList(state) {
+     
+                 return state.categoryList
      }
        
 
@@ -98,7 +109,7 @@ export const actions = {
               
              const { data } = await this.$axios.get(API.CATEGORY_ARTICLES_LIST(categorySlug))
              state.category.articles = []
-             data.forEach((article) => {
+             data.data.forEach((article) => {
 
              	  commit('updateCategoryArticles',article)
              })
@@ -111,7 +122,7 @@ export const actions = {
 
              const { data } = await this.$axios.get(API.EDITION_ARTICLES_LIST(editionSlug))
 
-             data.forEach((article) => {
+             data.data.forEach((article) => {
              	
              	  commit('updateEditionArticles',article)
              })
@@ -126,7 +137,7 @@ export const actions = {
 
              const { data } = await this.$axios.get(API.AUTHOR_ARTICLES_LIST(authorSlug))
 
-             data.forEach((article) => {
+             data.data.forEach((article) => {
              	
              	  commit('updateAuthorArticles',article)
              })
@@ -135,11 +146,11 @@ export const actions = {
 
       async retrieveFeaturedArticles({commit,dispatch,state}){
               
-             const { data } = await axios.get(API.FEATURED_ARTICLES_LIST)
+             const { data } = await this.$axios.get(API.FEATURED_ARTICLES_LIST)
 
              state.featured.articles = []
 
-             data.forEach((article) => {
+             data.data.forEach((article) => {
 
              	  commit('updateFeaturedArticles',article)
              })
@@ -150,12 +161,41 @@ export const actions = {
 
              
              const { data } = await this.$axios.get(API.EDITION_LIST_URL)
+               
+            commit('common/updateSidebarItems',{items:data,type: 'edition', to: 'edition/'},{root:true})
+
 
              data.forEach((edition) => {
-
+ 
                 commit('updateEditionList',edition)
+
+                 commit('common/updateSidebarItems',edition,{root:true})
                    
              })
+                    
+      },
+
+
+      async retrieveCategoryList({commit,dispatch,state}){
+ 
+             
+             //shoulb be loaded once
+             if (state.categoryList.length == 0) {
+
+               const { data } = await this.$axios.get(API.CATEGORY_LIST_URL)
+
+               
+
+              commit('common/updateSidebarItems',{items:data,type: 'category', to: 'category/'},{root:true})
+
+
+                data.forEach((category) => {
+
+                       commit('updateCategoryList',category)
+                  
+                })
+             }
+             
                     
       },
     

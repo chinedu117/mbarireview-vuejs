@@ -1,36 +1,39 @@
 import Vue from 'vue'
+import { CHECK_FOR_CALL_FOR_SUBMISSION } from '~/api'
+
 export const strict = false
 
 export const state = () => {
   return {
-
+      submission: {
+      	  calling: true,
+      	  message: "We are accepting submission",
+      	  title: 'Call for submission'
+      }
   }
 }
+ 
+export const mutations = {
+
+  checkForCallForSubmission (state, value) {
+         state.submission =  value
+       },
+}
+
+export const actions = {
+
+	 async nuxtServerInit ({dispatch,commit},{ req, route, app, store }) {
+	 	 
+	 	 dispatch('checkForCallForSubmission')
+	 	 dispatch('articles/retrieveCategoryList')
+     },
 
 
-// export const actions = {
+     async checkForCallForSubmission({commit,dispatch}){
 
-// 	 // async nuxtServerInit ({dispatch,commit},{ req, route, app, store }) {
-// 	 // 	console.log("store called")
-//   //       // let cookies = new Cookies(req)
-//   //       // let token = cookies.get('x-access-token')
-// 	 //   const token = app.$cookies.get('x-access-token')
-//   //        console.log("token from cookie is "+token)
-// 	 //    if (token) {
-// 	 //      try {
-// 	 //        await commit('auth/saveToken', token)
-// 	 //        await dispatch('auth/retrieveUser', token)
-// 	 //      } catch(e) {
-// 	 //        console.log("error occured "+e)
-// 	 //        try{
-// 	 //        	console.log("logging out")
-// 	 //        	await dispatch('auth/logout')
-// 	 //          } catch (e){
-// 	 //          	 console.log("error logging out "+e)
-// 	 //          }
+            const  {data} = await this.$axios.get(CHECK_FOR_CALL_FOR_SUBMISSION)
 
-
-// 	 //      }
-// 	 //    }
-//   // }
-// }
+            commit('checkForCallForSubmission',data)
+                   
+      },
+}

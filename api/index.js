@@ -84,8 +84,13 @@ export const CATEGORY_LIST_URL = baseUrl +  "/list/category"
 export const CATEGORY_LIST_SUBMITTABLE_URL = baseUrl +  "/list/category/submittable"
 
 
-
-
+/**
+ * Returns call for submission info for public
+ *
+ * @param  param
+ * @return return 200 json {calling: Boolean, }
+ */
+export const CHECK_FOR_CALL_FOR_SUBMISSION = baseUrl + '/check/submission'
 /**
  * Lists the editions in the company
  *

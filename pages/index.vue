@@ -1,8 +1,10 @@
 <template>
    <div class="">
+
         <article-list
             :list="articles"
          />
+         {{ articles }}
    </div>
 </template>
 <script type="text/javascript">
@@ -28,7 +30,7 @@ export default {
    computed:{
        
        articles(){
-
+            
              return this.$store.getters['articles/featuredArticles']
        }
    },

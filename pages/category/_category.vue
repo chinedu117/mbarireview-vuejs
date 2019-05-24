@@ -10,18 +10,13 @@
    import ArticleList from '~/components/ArticleList.vue'
    export default {
 
-    middleware: [],
+    middleware: ['default-sidebar-items'],
 
     layout: 'default',
   
 
    components: { ArticleList }, 
 
- 
-   asyncData(){
-
-     return { }
-   },
    
    async fetch({store,params}){
         		

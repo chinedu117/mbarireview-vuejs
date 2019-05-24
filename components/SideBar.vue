@@ -55,8 +55,14 @@
 
 		computed: {
 
-			visible(){
+			visible: {
+        get(){
 				 return this.$store.state.common.sidebar.visible
+        },
+        set(val){
+            
+           this.$store.dispatch('common/updateSidebar',{visible: val })
+        }
 			},
 
 			miniVariant(){

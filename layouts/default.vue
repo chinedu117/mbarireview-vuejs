@@ -5,12 +5,13 @@
     
     <sidebar></sidebar>
 
-
-
+    
+ 
     <v-content>
-      <!-- <v-container> -->
+      <v-container>
+        <call-for-submission/>
         <nuxt />
-      <!-- </v-container> -->
+      </v-container>
     </v-content>
    <app-footer></app-footer>
 
@@ -22,7 +23,7 @@
 import AppFooter from '~/components/AppFooter.vue'
 import sidebar from '~/components/SideBar.vue'
 import ToolBar from '~/components/ToolBar.vue'
-
+import CallForSubmission from '~/components/CallForSubmission.vue'
 
 export default {
   data() {
@@ -39,6 +40,6 @@ export default {
         }
   },
 
-  components: { AppFooter, sidebar, ToolBar }
+  components: { AppFooter, sidebar, ToolBar, CallForSubmission }
 }
 </script>

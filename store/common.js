@@ -13,12 +13,12 @@ const defaults = {
               {
                 icon: 'bubble_chart',
                 title: 'Non-Fiction',
-                to: '/inspire'
+                to: '/category/fiction'
               },
                {
                 icon: 'bubble_chart',
                 title: 'Non-Fiction',
-                to: '/inspire'
+                to: '/category/non-fiction'
               },
                {
                 icon: 'bubble_chart',
@@ -117,6 +117,26 @@ export const mutations = {
       updateSocialShare (state, options) {
         state.socialShare = Object.assign({}, defaults.socialShare, options)
       },
+
+      updateSidebarItems (state, value) {
+              
+              value.items.forEach((item) => {
+                    
+                    item.sidebar_item_type = value.type
+                    item.to = value.to + item.slug
+                    state.sidebar.items.push(item)
+              })
+             
+        },
+
+
+        removeSidebarItems (state, type) {
+                
+              state.sidebar.items = state.sidebar.items.filter((item) =>{
+
+                   return item.sidebar_item_type != type
+              })
+      },
 }
 
 export const actions = {
@@ -171,6 +191,20 @@ export const actions = {
              
              commit('toggleSkin')
             
-      }
+      },
+
+
+      async updateSidebarItems({commit},params){
+              
+              commmit('updateSidebarItems',params)  
+                    
+       },
+
+       async removeSidebarItems({commit},type){
+              
+              commmit('removeSidebarItems',type)  
+                    
+       },
+
 }
 
