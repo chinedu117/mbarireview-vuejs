@@ -1,33 +1,47 @@
 <template>
-  <v-container>
-  	<v-layout row wrap>
-  		<v-flex md12 xs12> 
-
-  		
-            <article>
-                <h1 class="display-2 mb-2">Prose</h1>
-            	
-            	<p>
-                  Our contactinformation goes here
-                  Email: {{ contact_email }}
-               </p>
-
-
-            </article>
-  		</v-flex>
-  	</v-layout>
-  </v-container>
+   <div class="articles">
+   	    <article-list
+            :list="articles"
+   	     />
+   </div>
 </template>
 <script type="text/javascript">
-	
-	export default {
-		
-		data(){
-			return {
-				contact_email: process.env.CONTACT_EMAIL,
-			}
-		}
-	}
+   
+   import ArticleList from '~/components/ArticleList.vue'
+   export default {
+
+    middleware: [],
+
+    layout: 'default',
+  
+
+   components: { ArticleList }, 
+
+ 
+   asyncData(){
+
+     return { }
+   },
+   
+   async fetch({store,params}){
+        		
+        await store.dispatch("articles/retrieveCategoryArticles",params.category)
+            
+   },
+
+   computed:{
+       
+       articles(){
+
+             return this.$store.getters['articles/categoryArticles']
+       }
+   },
+    methods:{
+        
+
+    },
+
+}
 </script>
 <style lang="stylus" scoped>
 

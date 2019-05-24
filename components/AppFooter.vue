@@ -32,7 +32,7 @@ export default {
 .my-appfooter {
   justify-content: center;
   text-align: center;
-  background: #e7e9ef33 !important;
+  background: #e7e9ef33;
   padding: 35px 20px;
   font-size: 16px;
   display: block;
@@ -50,7 +50,7 @@ export default {
     list-style: none;
     margin: 25px auto 35px;
     padding: 0;
-    color: black;
+ 
 }
 
 .my-appfooter > ul > li {

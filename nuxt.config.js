@@ -35,7 +35,19 @@ module.exports = {
   css: [
     '~/assets/style/app.styl'
   ],
-
+  
+ workbox: {
+      runtimeCaching: [
+      {
+        // Should be a regex string. Compiles into new RegExp('https://my-cdn.com/.*')
+        urlPattern: 'https://fonts.googleapis.com/.*',
+        // Defaults to `networkFirst` if omitted
+        // handler: 'networkFirst',
+        // Defaults to `GET` if omitted
+        // method: 'GET'
+      }
+    ]
+  },
   /*
   ** Plugins to load before mounting the App
   */
@@ -57,11 +69,17 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
   },
-  
+
+ generate: {
+     fallback: true
+  }, 
+
   env: {
-    COMPANY_NAME: '"MBARIREVIEW.COM"',
-    CONTACT_EMAIL: "contact@mbarireview.com"
+    BASE_URL: 'http://mbari.test/api',
+    COMPANY_NAME: 'MBARIREVIEW.COM',
+    CONTACT_EMAIL: 'contact@mbarireview.com'
   },
+
   /*
   ** Build configuration
   */
