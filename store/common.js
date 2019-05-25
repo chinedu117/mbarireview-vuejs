@@ -1,7 +1,7 @@
 // Common State.
 const defaults = {
     sidebar: {  
-      visible: true,
+      visible: false,
       mini: false,
       fixed: false,
       items: [
@@ -119,13 +119,19 @@ export const mutations = {
       },
 
       updateSidebarItems (state, value) {
-              
-              value.items.forEach((item) => {
-                    
-                    item.sidebar_item_type = value.type
-                    item.to = value.to + item.slug
-                    state.sidebar.items.push(item)
-              })
+            
+             
+                 let newItems = value.items.map((item) =>{
+                        item.sidebar_item_type = value.type
+                        item.to = value.to + item.slug
+                        item.icon = value.icon
+                        return item
+                 })
+                  
+                 var items = state.sidebar.items.concat(newItems)
+               
+                 state.sidebar = Object.assign({}, defaults.sidebar, {items: items })
+               
              
         },
 
@@ -194,13 +200,13 @@ export const actions = {
       },
 
 
-      async updateSidebarItems({commit},params){
+     async  updateSidebarItems({commit},params){
               
-              commmit('updateSidebarItems',params)  
+            commit('updateSidebarItems',params)  
                     
        },
 
-       async removeSidebarItems({commit},type){
+       removeSidebarItems({commit},type){
               
               commmit('removeSidebarItems',type)  
                     

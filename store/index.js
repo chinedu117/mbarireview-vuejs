@@ -24,8 +24,8 @@ export const actions = {
 
 	 async nuxtServerInit ({dispatch,commit},{ req, route, app, store }) {
 	 	 
-	 	 dispatch('checkForCallForSubmission')
-	 	 dispatch('articles/retrieveCategoryList')
+	 	          await dispatch('checkForCallForSubmission')
+	 	           await dispatch('articles/retrieveCategoryList')
      },
 
 
@@ -34,6 +34,8 @@ export const actions = {
             const  {data} = await this.$axios.get(CHECK_FOR_CALL_FOR_SUBMISSION)
 
             commit('checkForCallForSubmission',data)
+
+            // console.log(data)
                    
       },
 }

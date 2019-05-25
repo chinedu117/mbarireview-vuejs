@@ -35,9 +35,6 @@
         </v-list-tile>
 
 
-        
-
-
       </v-list>
     </v-navigation-drawer>
 </template>
@@ -63,7 +60,7 @@
             
            this.$store.dispatch('common/updateSidebar',{visible: val })
         }
-			},
+			   },
 
 			miniVariant(){
 

@@ -8,10 +8,10 @@
     
  
     <v-content>
-      <v-container>
+ <!--      <v-container fluid flat> -->
         <call-for-submission/>
         <nuxt />
-      </v-container>
+      <!-- </v-container> -->
     </v-content>
    <app-footer></app-footer>
 

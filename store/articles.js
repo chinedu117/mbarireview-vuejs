@@ -162,15 +162,13 @@ export const actions = {
              
              const { data } = await this.$axios.get(API.EDITION_LIST_URL)
                
-            commit('common/updateSidebarItems',{items:data,type: 'edition', to: 'edition/'},{root:true})
+            dispatch('common/updateSidebarItems',{items:data,type: 'edition', to: 'edition/',icon: 'file'},{root:true})
 
 
              data.forEach((edition) => {
  
                 commit('updateEditionList',edition)
 
-                 commit('common/updateSidebarItems',edition,{root:true})
-                   
              })
                     
       },
@@ -180,13 +178,13 @@ export const actions = {
  
              
              //shoulb be loaded once
-             if (state.categoryList.length == 0) {
+             // if (state.categoryList.length == 0) {
 
                const { data } = await this.$axios.get(API.CATEGORY_LIST_URL)
 
-               
+               // console.log(data)
 
-              commit('common/updateSidebarItems',{items:data,type: 'category', to: 'category/'},{root:true})
+              dispatch('common/updateSidebarItems',{items: data, type: 'category', to: 'category/',icon: "file"},{root:true})
 
 
                 data.forEach((category) => {
@@ -194,7 +192,7 @@ export const actions = {
                        commit('updateCategoryList',category)
                   
                 })
-             }
+             // }
              
                     
       },

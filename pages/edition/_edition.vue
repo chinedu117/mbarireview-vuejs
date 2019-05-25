@@ -1,9 +1,8 @@
 <template>
-   <div class="">
-   	    <article-list
+    <article-list
             :list="articles"
-   	     />
-   </div>
+         />
+
 </template>
 <script type="text/javascript">
    
