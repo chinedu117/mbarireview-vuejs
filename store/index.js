@@ -24,8 +24,8 @@ export const actions = {
 
 	 async nuxtServerInit ({dispatch,commit},{ req, route, app, store }) {
 	 	 
-	 	          await dispatch('checkForCallForSubmission')
-	 	           await dispatch('articles/retrieveCategoryList')
+	 	          // await dispatch('checkForCallForSubmission')
+	 	          //  await dispatch('articles/retrieveCategoryList')
      },
 
 
