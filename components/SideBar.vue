@@ -19,7 +19,7 @@
         </v-list-tile>
 
 
-        <v-list-tile
+        <v-list-tile @click="visible = false"
           v-for="(item, i) in items"
           :key="i"
           :to="item.to"
@@ -91,7 +91,7 @@
 	   methods: {
 
 	   	  toggleNightMode(){
-                  
+              this.visible = false
 	   	  	    this.$store.dispatch('common/toggleSkin')
 	   	  },
 

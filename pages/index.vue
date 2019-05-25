@@ -1,16 +1,8 @@
 <template>
   <div>
-      
-        <div class="welcome-banner">
-           
-           <div class="welcome-content">
-               <logo/>
-               <div class="welcome-message">
-                  <h3>Mbari Reviews</h3>
-                   <div> Remembering and Celebrating</div>
-               </div>
-           </div>
-       </div>
+        
+        <!-- welcome bannen -->
+        <welcome-banner/>
        <!-- featured list -->
         <article-list
             :list="articles"
@@ -19,8 +11,8 @@
 </div>
 </template>
 <script type="text/javascript">
- import Logo from '~/components/Logo.vue'
  import ArticleList from '~/components/ArticleList.vue'
+   import WelcomeBanner from '~/components/WelcomeBanner.vue'
 export default {
    
    data(){
@@ -28,7 +20,7 @@ export default {
 
       }
    },
-   components: { ArticleList, Logo }, 
+   components: { ArticleList, WelcomeBanner}, 
 
     middleware: ['default-sidebar-items'],
 
@@ -277,27 +269,6 @@ export default {
 </script>
 
 <style type="text/css">
-.welcome-banner {
-   display: flex;
-   justify-content: center;
-   width: 100%;
-   height: 500px;
-   background: grey;
-}
 
-.welcome-content {
-   margin:auto;
-   display: flex;
-}
-
-.welcome-message {
-   flex: 1;
- 
-}
-
-.welcome-message h3 {
-    font-size: 36px;
-    font-weight: 700;
-}
 </style>
 
