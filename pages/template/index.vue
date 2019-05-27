@@ -11,7 +11,7 @@
                          Who we are, our origin and our values.<br>
                          Welcome to Mbari Reviews.<br>
                           </p>
-                          <v-btn outline>WRITE YOUR OWN STORY</v-btn>
+                          <v-btn outline @click="createSubmission">WRITE YOUR OWN STORY</v-btn>
                    </div>
                </div>
                
@@ -26,7 +26,8 @@
 		           class="list-item"
                    v-for="(item,index) in articles"
                     :key="index"
-                    :item="item">
+                    :item="item"
+                    >
 		        <v-img
 		          src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
 		          height="200px"
@@ -35,14 +36,14 @@
 
 		        <v-card-title primary-title>
 		          <div>
-		          	<span class="grey--text font-weight-bold">{{item.edition.title}}</span>
+		          	<span class="grey--text font-weight-bold">{{ item.category.title }} In:{{item.edition.title}}</span>
 		            <div class="headline">{{ item.title }}</div>
 		            <span class="grey--text"> by {{ item.author.name }}</span>
 		          </div>
 		        </v-card-title>
 
 		        <v-card-actions>
-		         <v-btn flat class="ml-2" v-if="!show" outline>READ</v-btn>
+		         <v-btn flat class="ml-2" v-if="!show" @click="read" outline>READ</v-btn>
 		          <!-- <v-btn flat color="purple">Explore</v-btn> -->
 		          <v-spacer></v-spacer>
 		          <v-btn icon @click="show = !show">
@@ -53,7 +54,7 @@
 		        <v-slide-y-transition>
 		          <v-card-text v-show="show">
 		            <p>{{ item.intro_text }}</p>
-                <v-btn flat style="margin-left: -2px" outline>MORE</v-btn>
+                <v-btn flat style="margin-left: -2px" @click="read" outline>MORE</v-btn>
 		          </v-card-text>
 
 		        </v-slide-y-transition>
@@ -66,12 +67,12 @@
 <script type="text/javascript">
  // import ArticleList from '~/components/ArticleList.vue'
    // import WelcomeBanner from '~/components/WelcomeBanner.vue'
-   import Logo from '~/components/Logo.vue'
+import Logo from '~/components/Logo.vue'
 export default {
    
    data(){
       return {
-         show: true
+         show: false
       }
    },
    components: { Logo},  // ArticleList, WelcomeBanner
@@ -85,12 +86,12 @@ export default {
 
    // components: { }, 
    
-   async fetch({store,params}){
+   // async fetch({store,params}){
 
 
-        // await store.dispatch("articles/retrieveFeaturedArticles")
+   //      // await store.dispatch("articles/retrieveFeaturedArticles")
             
-   },
+   // },
 
    computed:{
        
@@ -371,8 +372,17 @@ export default {
        }
    },
     methods:{
-        
+         
+         read(){
 
+             this.$router.push({path: '/template/article'})
+         },
+
+         createSubmission(){
+             this.$router.push({path: '/template/submission-create'})
+             
+         }     
+ 
     },
 
 }

@@ -114,10 +114,10 @@ layout: 'default',
 // components: { }, 
 
 
-asyncData(){
+// asyncData(){
 
- return { }
-},
+//  return { }
+// },
 
 // async fetch({store,params}){
     
