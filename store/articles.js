@@ -23,6 +23,7 @@ export const state = () => {
           
           editionList: [],
           categoryList: [],
+          author: {}
 
       }
 }
@@ -96,7 +97,12 @@ export const getters = {
       categoryList(state) {
      
                  return state.categoryList
-     }
+     },
+
+
+     updateAuthorBio (state, value) {
+             state.author =  value
+           },
        
 
  }
@@ -134,7 +140,8 @@ export const actions = {
       async retrieveAuthorArticles({commit,dispatch,state},authorSlug){
              
              state.author.articles = []
-
+             
+                              await dispatch('retrieveAuthorBio',authorSlug)
              const { data } = await this.$axios.get(API.AUTHOR_ARTICLES_LIST(authorSlug))
 
              data.data.forEach((article) => {
@@ -196,5 +203,16 @@ export const actions = {
              
                     
       },
+
+
+      async retrieveAuthorBio({commit,dispatch},authorSlug){
+              
+              
+              
+                 let {data } = await this.$axios.get(API.AUTHOR_PROFILE(authorSlug))
+
+                 commit('updateAuthorBio',data)
+                    
+       },
     
 }

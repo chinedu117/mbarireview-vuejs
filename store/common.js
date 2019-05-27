@@ -200,13 +200,13 @@ export const actions = {
       },
 
 
-     async  updateSidebarItems({commit},params){
+     updateSidebarItems({commit},params){
               
             commit('updateSidebarItems',params)  
                     
        },
 
-       removeSidebarItems({commit},type){
+    removeSidebarItems({commit},type){
               
               commmit('removeSidebarItems',type)  
                     

@@ -77,7 +77,11 @@ module.exports = {
   env: {
     BASE_URL: 'http://mbari.test/api',
     COMPANY_NAME: 'MBARIREVIEW.COM',
-    CONTACT_EMAIL: 'contact@mbarireview.com'
+    CONTACT_EMAIL: 'contact@mbarireview.com',
+    FACEBOOK_CLIENT_ID: '',
+    FACEBOOK_CALLBACK_URL: '',
+    GOOGLE_CLIENT_ID: '',
+    GOOGLE_CALLBACK_URL: '',
   },
 
   /*

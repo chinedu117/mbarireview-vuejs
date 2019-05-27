@@ -9,7 +9,7 @@
  
     <v-content>
  <!--      <v-container fluid flat> -->
-        <call-for-submission/>
+        <!-- <call-for-submission/> -->
         <nuxt />
       <!-- </v-container> -->
     </v-content>

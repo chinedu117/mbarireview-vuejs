@@ -5,7 +5,15 @@ import * as API from '@/api'
    export const state = () => {
      return {
         token: null, //JSON.parse(localStorage.getItem('betaplace')).auth.token || null,
-        user: null, //Object.assign({},JSON.parse(localStorage.getItem('user'))) || null
+        user: null, //Object.assign({},JSON.parse(localStorage.getItem('user'))) || null,
+        profile:{
+            
+              country:"Nigeria",
+              name: 'Mmaduagwu Malachy',
+              bio: " Loves writing about life and nature",
+              contacts: 'https://facebook.com/malachy-mmaduagwu',
+
+          },
      }
         
     }
@@ -48,7 +56,12 @@ import * as API from '@/api'
               //localStorage.removeItem('user')
               state.user = null
               this.$cookies.remove('x-access-token')
-          }
+          },
+
+          // setProfile(state,val){
+               
+          //      state.profile = Object.assign({},state.profile,val)
+          // }
           
     }
 
