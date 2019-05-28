@@ -40,7 +40,7 @@
 
 	 			<v-card-actions>
 	 				<v-pagination
-	 				length="8"
+	 				length='total'
 	 				v-model="currentPage"
 	 				class="mx-auto"
 	 				>
@@ -62,6 +62,7 @@ export default {
 components: { AuthorBioEdit },
 data() {
 	return {
+		 total: 8,
 		 currentPage: 1,
          submissions: [{ 
                       title: "Top western road trips",

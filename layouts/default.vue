@@ -6,7 +6,28 @@
     <sidebar></sidebar>
 
     
- 
+    <!-- the snackbar or toast section for displaying errors and success messages -->
+    <v-snackbar
+    
+    :right="$vuetify.breakpoint.lgAndUp"
+    v-model="snackBarActive"
+    :timeout="$store.state.common.snackBar.timeout"
+    :bottom="$vuetify.breakpoint.mdAndDown"
+      :top="$vuetify.breakpoint.lgAndUp"
+      :color="$store.state.common.snackBar.color"
+      >
+    
+        {{ $store.state.common.snackBar.msg }}
+        <v-btn
+            color="$store.state.common.snackBar.color"
+            flat
+            @click="snackBarActive = false"
+        >
+            Close
+        </v-btn>
+   </v-snackbar>
+
+
     <v-content>
  <!--      <v-container fluid flat> -->
         <!-- <call-for-submission/> -->
@@ -14,7 +35,7 @@
       <!-- </v-container> -->
     </v-content>
    <app-footer></app-footer>
-
+    
 
   </v-app>
 </template>
@@ -37,6 +58,19 @@ export default {
         nightMode(){
 
              return this.$store.state.common.skin.nightMode
+        },
+
+        snackBarActive: {
+
+             get () {
+                 return this.$store.state.common.snackBar.show
+            },
+
+            set (val) {
+                this.$store.dispatch('common/updateSnackBar',{ show : val})
+            }
+
+           
         }
   },
 

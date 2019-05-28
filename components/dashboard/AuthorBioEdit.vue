@@ -4,6 +4,14 @@
 	  	
 	  		<v-flex md12 xs12> 
                 <v-card flat  justify-content-center>
+                	<v-container>
+		              	<v-layout grid-xs-list wrap>
+                          <v-flex xs12>
+                          	 <v-btn @click="edit"><v-icon>edit</v-icon></v-btn>
+                          	 <v-btn @click="save" v-if="showSave"><v-icon>save</v-icon></v-btn>
+                          </v-flex>
+		              	</v-layout>
+		              </v-container>
 	              	<v-container>
 		              	<v-layout grid-xs-list wrap>
 			              	<v-flex xs12 md4>
@@ -52,52 +60,69 @@
 </template>
 <script>
 
-
+import HandlesRequest from '~/utils/RequestHandler.vue'
 export default {
 
 // middleware: ['middleware'],
 name: "author-bio-edit",
+mixins: [ HandlesRequest ],
 
 data() {
 	return {
 		profile:{ 
-			bio: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime.",
-		      pen_name: "Emeka Obi",
-		     contacts: "https://facebook.com/sdf/"
+			  bio: null,
+		      pen_name: this.$store.getters['auth/getUser].name,
+		      contacts: "",
+		      profile_img:""
 		 },
 
 		 editing: {
 		 	bio: false,
 		 	pen_name: false,
 		 	contacts: false,
-		 }
+		 },
+
+		 showSave: false
 	}
 },
 
-// components: { }, 
 
+created(){
+     
+     if ($this.profile.bio === null ) {
 
-// async fetch({store,params}){
-    
-//     await store.dispatch("storeNamespace/storeAction")
-        
-// },
+           this.editing.bio = true
+     }
 
-computed:{
-   
-   // storeAction(){
+     this.profile = this.$store.getters['auth/getProfile']
 
-   //       return this.$store.getters['storeNamespace/storeGetter']
-   // }
 },
+
+
 methods:{
     
+    save(){
+         
+         this.mixin_handleRequest(this.$store.dispatch('auth/submitProfile',this.profile))
+          this.editing(false)
+    },
+
+    edit(){
+
+    	  this.editing(true)
+    },
+
+    editing(val){
+
+         this.editing.bio = val
+    	  this.editing.pen_name = val
+
+    	  this.editing.contacts = val
+
+    	  this.showSave = val
+    }
 
 },
 
 }
 </script>
-
-<style lang="stylus">
-
-</style>

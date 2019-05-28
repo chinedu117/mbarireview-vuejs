@@ -1,48 +1,65 @@
 <template>
-   <div>
-   
+  <div>
 	  <v-container>
 	  	<v-layout row wrap>
 	  	
 	  		<v-flex md12 xs12> 
                 <header>
-                	<h1 class="display-2 mb-2"> This is the title</h1>
+
+                	 <span class="grey--text"><v-chip>Non fiction</v-chip> In: The Nature  </span>
+                	<h1 class="display-3 my-2"> This is the title</h1>
+
+                	<v-list-tile>
+                		<v-list-tile-avatar>
+                			<v-img
+                     	   src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                     	 >	</v-img>
+                     	</v-list-tile-avatar>
+                     	 <v-list-tile-content>
+                     	 	<h3>Emeka Obi</h3>
+                     	 	<span>20-10-2019</span>
+                     	 </v-list-tile-content>
+                	</v-list-tile>
+                      
 
                 </header>
+                <section class="section-across">
+                	<v-img
+                     	src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                     	>
+                     </v-img>
+
+                </section>
+
 	            <article>
 	                
 	            	<p>
 	                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. Nesciunt minus, facere cumque repudiandae, molestiae adipisci culpa, sit sequi quos maxime error consectetur eveniet at asperiores et hic quibusdam corporis voluptas.
 	               </p>
 
-	               <h1 class="display-2 mb-2"> This is the title</h1>
+	               <h3 class="headline"> This is the title</h3>
 	            	<p>
 	                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. Nesciunt minus, facere cumque repudiandae, molestiae adipisci culpa, sit sequi quos maxime error consectetur eveniet at asperiores et hic quibusdam corporis voluptas.
 	               </p>
 
-	               <h1 class="display-2 mb-2"> This is the title</h1>
+	               <h3 class="headline"> This is the title</h3>
 	            	<p>
 	                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. Nesciunt minus, facere cumque repudiandae, molestiae adipisci culpa, sit sequi quos maxime error consectetur eveniet at asperiores et hic quibusdam corporis voluptas.
 	               </p>
 
-	               <h1 class="display-2 mb-2"> This is the title</h1>
+	               <h3 class="headline"> This is the title</h3>
 	            	<p>
 	                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. Nesciunt minus, facere cumque repudiandae, molestiae adipisci culpa, sit sequi quos maxime error consectetur eveniet at asperiores et hic quibusdam corporis voluptas.
 	               </p>
 
-	               <h1 class="display-2 mb-2"> This is the title</h1>
+	               <h3 class="headline"> This is the title</h3>
 	            	<p>
 	                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. Nesciunt minus, facere cumque repudiandae, molestiae adipisci culpa, sit sequi quos maxime error consectetur eveniet at asperiores et hic quibusdam corporis voluptas.
 	               </p>
                  
 
 
-	              <div class="author">
-	  				  <div class="author-img">A</div>
-	  				   <div class="author-name">Emeka Obi</div>
-                  
-	  				  
-	  			 </div>
+	             <author-bio/>
 	            </article>
 
 	  		</v-flex>
@@ -51,66 +68,84 @@
 	   </v-container>
   </div>
 </template>
-<script type="text/javascript">
-	
-	export default {
-	  
-	    // middleware: [],
-	
-	    layout: 'default',
-	  
-	
-	   // components: { }, 
-	
-	 
-	   asyncData(){
-	
-	     return { }
-	   },
-	   
-	   // async fetch({store,params}){
-	        
-	   //      await store.dispatch("storeNamespace/storeAction")
-	            
-	   // },
-	
-	   // computed:{
-	       
-	   //     storeAction(){
-	
-	   //           return this.$store.getters['storeNamespace/storeGetter']
-	   //     }
-	   // },
-	    methods:{
-	        
-	
-	    },
-	
-	}
-		
+<script>
+
+import AuthorBio from '~/components/AuthorBio.vue'
+export default {
+
+// middleware: ['middleware'],
+
+layout: 'default',
+
+
+// components: { }, 
+
+
+// asyncData(){
+
+//  return { }
+// },
+
+// async fetch({store,params}){
+    
+//     await store.dispatch("storeNamespace/storeAction")
+        
+// },
+
+computed:{
+   
+   // storeAction(){
+
+   //       return this.$store.getters['storeNamespace/storeGetter']
+   // }
+},
+methods:{
+    
+
+},
+
+}
 </script>
+
 <style lang="stylus" scoped>
 
-author
-	display:flex
+.section-across 
+	margin: 0 -200px
+.main_link,.sub_link
+	color: red
+	text-decoration: none
+	list-style: none
 
-author-img 
-	display:block
-	border-radius: 50%
-	width: 250px
-	height: 250px
-	background: grey
-	padding: 10px
+.main_link a::before,.sub_link a::before
+	content: "# "
+	margin-left: -20px 
 
+.main_link:hover,.sub_link:hover
+	color: grey
+.sub_link
+	font-size: 18px
+	font-weight: 300
+.sub_link a
+	text-decoration: none
+.main_link
+	font-size: 24px
+	font-weight: 700
 p
 	line-height: 1.9
 	font-size: 18px
-
 article, header
 	padding:25px 205px 50px 120px
 header
 	margin-bottom: 15px
-
+.anc::before
+	content: "#";
+	margin-left: -35px;
+	margin-bottom: -55px
+	position: absolute;
+	font-size: 28px;
+	color: #f4645f;
+	opacity: .6;
+	color: red
 a
 	text-decoration: none !important
 h2 a
@@ -132,5 +167,8 @@ article h2, article h4
 	p
 		line-height: 1.9
 		font-size: 16px
-
+	.main_link
+		font-size: 18px
+	.sub_link
+		font-size: 16px
 </style>

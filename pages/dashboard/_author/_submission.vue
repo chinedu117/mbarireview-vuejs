@@ -10,18 +10,18 @@
                 	 <span class="grey--text" v-if="!editing.category" @click="editing.category = true"><v-chip>{{ category }}</v-chip> In: The Nature  </span>
 
                      <v-select 
-                     v-model="article.category_id" 
-                     v-else 
+                      v-model="submission.category_id" 
+                      v-else 
                       :label="category.title"
                       @change="editing.category = false" 
-                      :items="category_list"
+                      :items="categories"
                       item-value="id"
                       item-text="title"
                       ></v-select>
 
 
-                	<h1 class="display-3 my-2" v-if="!editing.title"  v-text="article.title" @click="editing.title = true"></h1>
-                    <v-text-field v-else autofocus v-model="article.title" outline size="24px"  @blur="editing.title = false"></v-text-field>
+                	<h1 class="display-3 my-2" v-if="!editing.title"  v-text="submission.title" @click="editing.title = true"></h1>
+                    <v-text-field v-else autofocus v-model="submission.title" outline size="24px"  @blur="editing.title = false"></v-text-field>
 
 
                 	<v-list-tile>
@@ -48,43 +48,10 @@
 
 	            <article>
 	                
-	               <p v-if="!editing.fulltext"  v-html="article.fulltext" @click="editing.fulltext = true"> </p>
-                   <v-textarea outline row="20" cols="20" autofocus v-else v-model="article.fulltext"  @blur="editing.fulltext = false"></v-textarea>
+	               <p v-if="!editing.fulltext"  v-html="submission.fulltext" @click="editing.fulltext = true"> </p>
+                   <v-textarea outline row="20" cols="20" autofocus v-else v-model="submission.fulltext"  @blur="editing.fulltext = false"></v-textarea>
 
-
-	              <v-card flat  justify-center>
-	              	<v-container>
-		              	<v-layout grid-list-xs wrap>
-			              	<v-flex xs4 md4>
-				              	<v-avatar
-			                       
-			                       :size="$vuetify.breakpoint.mdAndUp ? '150px' : '80px' "
-			                       class="mt-2"
-			                      >
-			                     	<v-img
-			                     	src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-			                     
-			                     	aspect-ratio="1"
-			                     	>	</v-img>
-			                     </v-avatar>
-		                     </v-flex>
-		                     <v-flex md8 xs8>
-			                     <v-card-text>
-			                     	<h3 class="headline"> Emeka Obi</h3>
-					            	<p>
-					                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. 
-					               </p>
-			                     </v-card-text>
-		                   </v-flex>
-		                   <v-flex xs12>
-		                   	  <div>
-			                    <v-btn outline small class="mt-2 mx-auto">Follow</v-btn>
-		                   	  	
-		                   	  </div>
-		                   </v-flex>
-	               </v-layout>
-               </v-container>
-	              </v-card>
+                     <author-bio-edit/>
 	            </article>
 
 	  		</v-flex>
@@ -95,7 +62,7 @@
 </template>
 <script>
 
-
+import AuthorBioEdit from '~/components/dashboard/AuthorBioEdit.vue'
 export default {
 
 // middleware: ['middleware'],
@@ -103,39 +70,16 @@ export default {
 layout: 'default',
 
 
-// components: { }, 
+components: { AuthorBioEdit }, 
  data(){
  	  return {
- 	  	  article: {
- 	  	  	  category_id: 1,
- 	  	      title: "This is title",
- 	  	  	  fulltext: `<p>
-		                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. Nesciunt minus, facere cumque repudiandae, molestiae adipisci culpa, sit sequi quos maxime error consectetur eveniet at asperiores et hic quibusdam corporis voluptas.
-		               </p>
 
-		               <h3 class="headline"> This is the title</h3>
-		            	<p>
-		                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. Nesciunt minus, facere cumque repudiandae, molestiae adipisci culpa, sit sequi quos maxime error consectetur eveniet at asperiores et hic quibusdam corporis voluptas.
-		               </p>
-
-		               <h3 class="headline"> This is the title</h3>
-		            	<p>
-		                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. Nesciunt minus, facere cumque repudiandae, molestiae adipisci culpa, sit sequi quos maxime error consectetur eveniet at asperiores et hic quibusdam corporis voluptas.
-		               </p>
-
-		               <h3 class="headline"> This is the title</h3>
-		            	<p>
-		                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. Nesciunt minus, facere cumque repudiandae, molestiae adipisci culpa, sit sequi quos maxime error consectetur eveniet at asperiores et hic quibusdam corporis voluptas.
-		               </p>
-
-		               <h3 class="headline"> This is the title</h3>
-		            	<p>
-		                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. Nesciunt minus, facere cumque repudiandae, molestiae adipisci culpa, sit sequi quos maxime error consectetur eveniet at asperiores et hic quibusdam corporis voluptas.
-		               </p>`,
-
-                 intro_text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. Nesciunt minus, facere cumque repudiandae, molestiae adipisci culpa, sit sequi quos maxime error consectetur eveniet at asperiores et hic quibusdam corporis voluptas.",
-
-                 images: ""
+ 	  	 submission: {
+ 	  	  	  category_id: null,
+ 	  	      title: "",
+ 	  	  	  fulltext: `Write the full story here`,
+              intro_text: "Write the summary here",
+              images: ""
  	  	  },
  	  	  editing: {
  	  	  	  category: false,
@@ -146,49 +90,72 @@ layout: 'default',
 
  	  	  },
 
- 	  	  category_list: [
- 	  	                   {
- 	  	                   	 id: 1,
- 	  	                   	 title: 'Fiction'
- 	  	                   },
- 	  	                   {
- 	  	                   	 id: 2,
- 	  	                   	 title: 'Non Fiction'
- 	  	                   },
- 	  	                   {
- 	  	                   	 id: 3,
- 	  	                   	 title: 'Poetry'
- 	  	                   }]
  	  }
  },
 
-asyncData(){
 
- return { }
+asynData(store,params){
+
+     store.dispatch("dashboard/retrieveSubmittableCategories")
+     if(params.submission){
+
+        let { data }  =  await store.dispatch("dashboard/retrieveSubmission",{slug: params.submission})
+          
+          return { 
+          	  submission: data
+          	  editing: {
+ 	  	  	  category: false,
+ 	  	  	  title: false,
+ 	  	  	  intro_text: false,
+ 	  	  	  fulltext: false,
+ 	  	  	  images: false
+
+ 	  	  }}
+     }
+
+    return { editing: {
+ 	  	  	  category: true,
+ 	  	  	  title: true,
+ 	  	  	  intro_text: false,
+ 	  	  	  fulltext: false,
+ 	  	  	  images: false
+
+ 	  	  }
+ 	  	}
 },
 
-// async fetch({store,params}){
-    
-//     await store.dispatch("storeNamespace/storeAction")
-        
-// },
 
 computed:{
    category(){
 
-   	    let category = this.category_list.find((item) => {
+   	    let category = this.$store.getters['dashboard/getCategories'].find((item) => {
    	    	  return item.id == this.article.category_id
    	    })
 
    	   return category.title
-   }
-   // storeAction(){
+   },
 
-   //       return this.$store.getters['storeNamespace/storeGetter']
-   // }
+   	categories(){
+   		 return this.$store.getters['dashboard/getCategories']
+   	},
+
 },
 methods:{
-    
+     
+     	save(){
+     		 
+     		  alert("Save not implemented")
+     	},
+
+     	discard(){
+     		 
+     		  alert("discard not implemented")
+     	},
+
+     	submit(){
+     		 
+     		  alert("submit not implemented")
+     	},
 
 },
 

@@ -19,6 +19,11 @@ import * as API from '@/api'
     }
   
    export const  mutations = {
+
+
+        updateProfile (state, value) {
+                state.profile =  value
+              },
         saveUser(state, user) {
             
             //localStorage.removeItem('user')
@@ -195,8 +200,9 @@ import * as API from '@/api'
       async getMyProfile({getters}){
         axios.defaults.headers.common['Authorization'] = getters.getToken
          
-           return await  axios.get(API.GET_MY_PROFILE_URL)
-       
+          let  response =  await  axios.get(API.GET_MY_PROFILE_URL)
+           
+           commit('updateProfile',response.data)
       
       },
 

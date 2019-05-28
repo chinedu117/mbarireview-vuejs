@@ -1,40 +1,50 @@
 <template>
-	  <div class="list-display">
+<!-- featured list -->
 
-  	   <article-list-item class="list-item" 
-         v-for="(item,index) in list"
-        :key="index"
-        :item="item"> 
-        </article-list-item>
-
-  	  </div>
-</template>
- <script>
-     import ArticleListItem from '~/components/ArticleListItem.vue'
-    export default {
-       name: 'article-list',
-       props: {
-       	  list: {
-       	  	 type: Array,
-       	  	 required: true,
-
-       	  }
-       },
-
-       components: { ArticleListItem },
+    <div class="list-display">
        
-    }
+       <article-list-item
+          v-for="(item,index) in articles"
+                :key="index"
+                :item="item"
+       ></article-list-item>
+         
+
+     </div>
+</template>
+<script type="text/javascript">
+import ArticleListItem from '~/components/ArticleListItem.vue'
+export default {
+   
+   name: 'article-list',
+   components: { ArticleListItem }, 
+
+   props: {
+         "articles": { 
+                    type: Array,
+                    required: true
+                  }
+   },
+
+    methods:{
+         
+           
+ 
+    },
+
+}
 </script>
-  
- <style>
-  .list-display {
+
+<style type="text/css">
+
+ .list-display {
      margin:auto;
      justify-content: space-between;
      flex-wrap: wrap;
+     width: 90%;
+     margin-top: 10px;
   }
-  .list-item {
-     margin-bottom : 15px;
-  }
+  
 
    @media (min-width: 900px) {
     .list-display {
@@ -42,13 +52,7 @@
       width: 80%;
       padding: 20px;
     }
-    .list-item {
-      flex-basis: 30%;
-      margin: auto;
-       margin-bottom : 15px;
-       border-radius: 5px;
     }
-    }
- </style>
 
+</style>
 
