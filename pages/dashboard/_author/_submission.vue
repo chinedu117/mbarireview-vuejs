@@ -1,6 +1,14 @@
 <template>
   <div>
-
+    <v-container>
+      <v-layout row wrap>
+        <v-flex xs12>
+            <v-btn @click="save">Save</v-btn>
+            <v-btn @click="discard">Discard</v-btn>
+             <v-btn @click="submit">Submit</v-btn>
+        </v-flex>
+      </v-layout>
+    </v-container>
 	  <v-container>
 	  	<v-layout row wrap>
 	  	
@@ -144,18 +152,29 @@ methods:{
      
      	save(){
      		 
-     		  alert("Save not implemented")
+     		  this.$store.dispatch('dashboard/makeSubmission',this.submission)
+          this.editing(true)
      	},
 
      	discard(){
-     		 
-     		  alert("discard not implemented")
+          this.editing(false)
+     		  let authorslug = this.$route.params.author
+     		  this.$router.push({path: `dashboard/${authorslug}`})
      	},
 
      	submit(){
      		 
-     		  alert("submit not implemented")
+     		  this.$store.dispatch('dashboard/makeSubmission',this.submission)
+          this.editing(false)
      	},
+
+       editing(val){
+           editing.category = val
+           editing.title = val
+           editing.intro_text = val
+           editing.fulltext = val
+           editing.images = val
+       }
 
 },
 
