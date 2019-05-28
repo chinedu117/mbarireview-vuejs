@@ -102,8 +102,7 @@ export default {
 
 layout: 'default',
 
-
-// components: { }, 
+components: { }, 
  data(){
  	  return {
  	  	  article: {

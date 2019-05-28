@@ -398,7 +398,7 @@ methods:{
 
     write(){
         alert("Writing submission:  Not Implemented")
-          
+          this.$router.push({path: '/template/submission-create'})
     },
 
     edit(slug){
