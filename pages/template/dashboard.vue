@@ -1,74 +1,39 @@
 <template>	
 <div>		
-     <v-container>
-	  	<v-layout row wrap>
-	  	
-	  		<v-flex md12 xs12> 
-                <v-card flat  justify-center>
-	              	<v-container>
-		              	<v-layout grid-list-xs wrap>
-			              	<v-flex xs4 md4>
-			              		<div style="display:flex; justify-content: center">
-					              	<v-avatar
-				                       
-				                       :size="$vuetify.breakpoint.mdAndUp ? '150px' : '80px' "
-				                       class="mt-2 mx-auto"
-				                      >
-				                     	<v-img
-				                     	src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-				                     
-				                     	aspect-ratio="1"
-				                     	>	</v-img>
-				                     </v-avatar>
-			                    </div>
-		                     </v-flex>
-		                     <v-flex md8 xs8>
-			                     <v-card-text>
-			                     	<h3 class="headline"> Emeka Obi</h3>
-					            	<p>
-					                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. 
-					               </p>
-			                     </v-card-text>
-		                   </v-flex>
-		                   <v-flex xs12>
-		                   	  <div style="display:flex; justify-content: flex-end">
-			                    <v-btn outline small class="mt-2">Follow</v-btn>
-		                   	  	
-		                   	  </div>
-		                   </v-flex>
-	               </v-layout>
-               </v-container>
-	              </v-card>
-	  		</v-flex>
-	  		
-	  	</v-layout>
-	   </v-container>
+     
+	   <author-bio-edit></author-bio-edit>
 
 		<v-container>
 	 	   <v-layout>
 	 		<v-card width="100%" style="border-radius: 5px">
-	 			<div class="teal" style="width: 100%; padding: 0; height: 200px;">
-	 				<h3>Your Submissions</h3>
-	 				<v-btn>Write</v-btn>
+	 			<div class="teal" style="width: 100%; padding: 10px; height: 80px; display: flex; justify-content: space-between">
+	 				<h3 class="headline white--text">Your Submissions</h3>
+	 				<v-btn @click="write">Write</v-btn>
 	 			</div>
 	 			<v-container
 	                v-for="(item,index) in submissions"
-
+                     @click="edit(item.id)"
+                     class="hover"
 	 			 >
 	 			   <v-layout>
 	 				<v-flex xs6>
+	 					<span class="grey--text">Title</span>
 	 					<h3>{{ item.title }}</h3>
 	 					<span>{{ item.category.title}}</span>
 
 	 				</v-flex>
 	 				<v-flex xs3>
+	 					<span class="grey--text">Edition</span><br>
 	 				   <span>{{ item.edition.title }}</span>
 	 				</v-flex>
 	                <v-flex xs3>
-	 					
+
+	 					<v-chip label small v-if="item.accepted" color="green darken-3" text-color="white" >Accepted</v-chip>
+	 					<v-chip label  small v-if="item.accepted === null" color="yellow darken-3" text-color="white" >awaiting</v-chip>
+	 					<v-chip label small v-if="item.accepted === false" color="red darken-3" text-color="white" >rejected</v-chip>
 	 				</v-flex>
 	 				<v-flex xs3>
-	 					<span>Action button</span>
+	 					 <v-btn small @click="withdraw(item.id)">Withdraw</v-btn>
 	 				</v-flex>
 	 			</v-layout>	
 	 			</v-container>
@@ -89,11 +54,12 @@
 </template>
 <script>
 
-
+	
+ import AuthorBioEdit from '~/components/dashboard/AuthorBioEdit.vue'
 export default {
 
 // middleware: ['middleware'],
-
+components: { AuthorBioEdit },
 data() {
 	return {
 		 currentPage: 1,
@@ -104,15 +70,14 @@ data() {
                          name: "Emeka Obi"
                        },
 
-                       edition: {
-                         title: "The Nature"
-                       },
-
-
-
-                       category: {
+            
+                       
+                       	category: {
                          title: 'Fiction',
                        },
+
+                       accepted: true,
+
 
                        edition: {
                          title: 'The Earth',
@@ -131,9 +96,13 @@ data() {
                          title: "The Nature"
                        },
 
-                       category: {
+                       
+                       	category: {
                          title: 'Fiction',
                        },
+
+                       accepted: null,
+
 
                        edition: {
                          title: 'The Earth',
@@ -152,9 +121,103 @@ data() {
                          title: "The Nature"
                        },
 
+	                   accepted: null,
                        category: {
                          title: 'Fiction',
                        },
+
+
+                     
+                       }, 
+
+                       { 
+                      title: "Top western road trips",
+                      intro_text: "I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.",
+                       author: {
+                         name: "Emeka Obi"
+                       },
+
+                       edition: {
+                         title: "The Nature"
+                       },
+
+                       
+                       	category: {
+                         title: 'Fiction',
+                       },
+
+                       accepted: true,
+
+
+                       edition: {
+                         title: 'The Earth',
+                       },
+
+                       },
+
+                       { 
+                      title: "Top western road trips",
+                      intro_text: "I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.",
+                       author: {
+                         name: "Emeka Obi"
+                       },
+
+                       edition: {
+                         title: "The Nature"
+                       },
+
+	
+                       category: {
+                         title: 'Fiction',
+                       },
+
+
+                        accepted: null,
+                       }, 
+
+                       { 
+                      title: "Top western road trips",
+                      intro_text: "I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.",
+                       author: {
+                         name: "Emeka Obi"
+                       },
+
+                       edition: {
+                         title: "The Nature"
+                       },
+
+                       
+                       	category: {
+                         title: 'Fiction',
+                       },
+
+                       accepted: null,
+
+
+                       edition: {
+                         title: 'The Earth',
+                       },
+
+                       },
+
+                       { 
+                      title: "Top western road trips",
+                      intro_text: "I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.",
+                       author: {
+                         name: "Emeka Obi"
+                       },
+
+                       edition: {
+                         title: "The Nature"
+                       },
+
+	
+                       category: {
+                         title: 'Fiction',
+                       },
+
+                       accepted:null,
+
 
                        edition: {
                          title: 'The Earth',
@@ -172,9 +235,13 @@ data() {
                          title: "The Nature"
                        },
 
-                       category: {
+                       
+                       	category: {
                          title: 'Fiction',
                        },
+
+                      accepted:false,
+
 
                        edition: {
                          title: 'The Earth',
@@ -193,13 +260,13 @@ data() {
                          title: "The Nature"
                        },
 
+	
                        category: {
                          title: 'Fiction',
                        },
 
-                       edition: {
-                         title: 'The Earth',
-                       },
+
+                        accepted: null,
                        }, 
 
                        { 
@@ -213,13 +280,15 @@ data() {
                          title: "The Nature"
                        },
 
-                       category: {
+                       
+                       	category: {
                          title: 'Fiction',
                        },
 
-                       edition: {
-                         title: 'The Earth',
-                       },
+                       accepted:false,
+
+
+            
 
                        },
 
@@ -230,17 +299,19 @@ data() {
                          name: "Emeka Obi"
                        },
 
-                       edition: {
-                         title: "The Nature"
-                       },
-
+                      
+	
                        category: {
                          title: 'Fiction',
                        },
 
+
                        edition: {
                          title: 'The Earth',
                        },
+
+                       accepted:false,
+
                        }, 
 
                        { 
@@ -254,9 +325,13 @@ data() {
                          title: "The Nature"
                        },
 
-                       category: {
+                       
+                       	category: {
                          title: 'Fiction',
                        },
+
+                       accepted: true,
+
 
                        edition: {
                          title: 'The Earth',
@@ -278,88 +353,8 @@ data() {
                        category: {
                          title: 'Fiction',
                        },
-
-                       edition: {
-                         title: 'The Earth',
-                       },
-                       }, 
-
-                       { 
-                      title: "Top western road trips",
-                      intro_text: "I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.",
-                       author: {
-                         name: "Emeka Obi"
-                       },
-
-                       edition: {
-                         title: "The Nature"
-                       },
-
-                       category: {
-                         title: 'Fiction',
-                       },
-
-                       edition: {
-                         title: 'The Earth',
-                       },
-
-                       },
-
-                       { 
-                      title: "Top western road trips",
-                      intro_text: "I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.",
-                       author: {
-                         name: "Emeka Obi"
-                       },
-
-                       edition: {
-                         title: "The Nature"
-                       },
-
-                       category: {
-                         title: 'Fiction',
-                       },
-
-                       edition: {
-                         title: 'The Earth',
-                       },
-                       }, 
-
-                       { 
-                      title: "Top western road trips",
-                      intro_text: "I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.",
-                       author: {
-                         name: "Emeka Obi"
-                       },
-
-                       edition: {
-                         title: "The Nature"
-                       },
-
-                       category: {
-                         title: 'Fiction',
-                       },
-
-                       edition: {
-                         title: 'The Earth',
-                       },
-
-                       },
-
-                       { 
-                      title: "Top western road trips",
-                      intro_text: "I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.",
-                       author: {
-                         name: "Emeka Obi"
-                       },
-
-                       edition: {
-                         title: "The Nature"
-                       },
-
-                       category: {
-                         title: 'Fiction',
-                       },
+                       
+                       accepted:false,
 
                        edition: {
                          title: 'The Earth',
@@ -396,6 +391,20 @@ computed:{
 },
 methods:{
     
+    withdraw(slug){
+        alert("Withdrawing submission:  Not Implemented")
+        
+    },
+
+    write(){
+        alert("Writing submission:  Not Implemented")
+          
+    },
+
+    edit(slug){
+        
+        alert("Editing submission:  Not Implemented")
+    }
 
 },
 
@@ -403,5 +412,6 @@ methods:{
 </script>
 
 <style lang="stylus">
-
+.hover:hover
+	background: #ddd
 </style>

@@ -21,7 +21,7 @@
 
 
                 	<h1 class="display-3 my-2" v-if="!editing.title"  v-text="article.title" @click="editing.title = true"></h1>
-                    <v-text-field v-else focus v-model="article.title" outline size="24px"  @blur="editing.title = false"></v-text-field>
+                    <v-text-field v-else autofocus v-model="article.title" outline size="24px"  @blur="editing.title = false"></v-text-field>
 
 
                 	<v-list-tile>
@@ -49,7 +49,7 @@
 	            <article>
 	                
 	               <p v-if="!editing.fulltext"  v-html="article.fulltext" @click="editing.fulltext = true"> </p>
-                   <v-textarea outline row="20" cols="20" focus v-else v-model="article.fulltext"  @blur="editing.fulltext = false"></v-textarea>
+                   <v-textarea outline row="20" cols="20" autofocus v-else v-model="article.fulltext"  @blur="editing.fulltext = false"></v-textarea>
 
 
 	              <v-card flat  justify-center>

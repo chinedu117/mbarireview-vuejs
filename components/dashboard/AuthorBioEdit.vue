@@ -56,8 +56,7 @@
 export default {
 
 // middleware: ['middleware'],
-
-layout: 'default',
+name: "author-bio-edit",
 
 data() {
 	return {
@@ -77,11 +76,6 @@ data() {
 
 // components: { }, 
 
-
-asyncData(){
-
- return { }
-},
 
 // async fetch({store,params}){
     
