@@ -81,7 +81,7 @@ module.exports = {
   }, 
 
   env: {
-    BASE_URL: process.NODE_ENV == 'production' ? 'http://mbarireview.com.ng/api' : 'http://mbari.test/api',
+    BASE_URL: process.env.NODE_ENV == 'production' ? 'http://mbarireview.com.ng/api' : 'http://mbari.test/api',
     COMPANY_NAME: 'MBARIREVIEW.COM',
     CONTACT_EMAIL: 'contact@mbarireview.com',
     FACEBOOK_CLIENT_ID: '',
