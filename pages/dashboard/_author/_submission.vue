@@ -102,7 +102,7 @@ components: { AuthorBioEdit },
  },
 
 
-asynData(store,params){
+async asynData({store,params}){
 
      store.dispatch("dashboard/retrieveSubmittableCategories")
      if(params.submission){
@@ -110,7 +110,7 @@ asynData(store,params){
         let { data }  =  await store.dispatch("dashboard/retrieveSubmission",{slug: params.submission})
           
           return { 
-          	  submission: data
+          	  submission: data,
           	  editing: {
  	  	  	  category: false,
  	  	  	  title: false,
@@ -121,7 +121,8 @@ asynData(store,params){
  	  	  }}
      }
 
-    return { editing: {
+    return { 
+            editing: {
  	  	  	  category: true,
  	  	  	  title: true,
  	  	  	  intro_text: false,

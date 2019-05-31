@@ -1,14 +1,20 @@
 <template>
-<!-- featured list -->
-
     <div class="list-display">
+       <div v-if="list.length > 0">
+         
        
        <article-list-item
-          v-for="(item,index) in articles"
+          v-for="(item,index) in list"
                 :key="index"
                 :item="item"
        ></article-list-item>
+        
+       </div>
+       <div v-else>
+
+         <h3>Oops Nothing here</h3>
          
+       </div>
 
      </div>
 </template>
@@ -20,7 +26,7 @@ export default {
    components: { ArticleListItem }, 
 
    props: {
-         "articles": { 
+         "list": { 
                     type: Array,
                     required: true
                   }

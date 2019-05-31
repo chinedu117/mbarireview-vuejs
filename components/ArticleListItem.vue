@@ -1,5 +1,4 @@
-
- <template>
+<template>
    <v-card class="list-item">
         <v-img
           src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
@@ -35,7 +34,7 @@
  </template>
  <script>
     export default {
-      
+      name: 'article-list-item',
       data(){
          return {
             show: false
@@ -60,19 +59,18 @@
  
  </script>
 
- <style type="text/css">
+<style type="text/css">
 .list-item {
      margin-bottom : 15px;
-
   }
 
- @media (min-width: 900px) {
+@media (min-width: 900px) {
     
     .list-item {
       flex-basis: 30%;
       margin: auto;
-       margin-bottom : 15px;
-       border-radius: 5px;
+      margin-bottom : 15px;
+      border-radius: 5px;
     }
 }
  </style>

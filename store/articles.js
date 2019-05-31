@@ -1,9 +1,10 @@
   import * as API from '~/api'
-  import axios from 'axios'
 //store state
 export const state = () => {
 
   return {
+          
+          article: null,
 
           edition : {
           	  articles: []
@@ -30,6 +31,10 @@ export const state = () => {
 
 //store mutations
 export const mutations = {
+    
+    updateArticle (state, value) {
+            state.article =  value
+          },
 
     updateFeaturedArticles (state, value) {
             state.featured.articles.push(value)
@@ -57,11 +62,21 @@ export const mutations = {
     updateCategoryList (state, value) {
             state.categoryList.push(value) 
           },
+
+     updateAuthorBio (state, value) {
+             state.author =  value
+           },
+       
 }
 
 //store getters
 export const getters = {
      
+    
+     article(state) {
+    
+                return state.article
+    },
 
       categoryArticles(state) {
      
@@ -98,22 +113,35 @@ export const getters = {
      
                  return state.categoryList
      },
+     
 
+      authorBio(state) {
+     
+                 return state.author
+     }
 
-     updateAuthorBio (state, value) {
-             state.author =  value
-           },
-       
+    
 
  }
 
 //store actions
 export const actions = {
      
+
+     async retrieveArticle({commit,dispatch},articleSlug){
+             
+             
+             
+                const {data } =  await this.$axios.get(API.ARTICLE_URL(articleSlug))
+
+                commit("updateArticle",data)
+                   
+      },
   
      async retrieveCategoryArticles({commit,dispatch,state},categorySlug){
               
              const { data } = await this.$axios.get(API.CATEGORY_ARTICLES_LIST(categorySlug))
+             console.log(data)
              state.category.articles = []
              data.data.forEach((article) => {
 
@@ -125,9 +153,11 @@ export const actions = {
       async retrieveEditionArticles({commit,dispatch,state},editionSlug){
               
              state.edition.articles = []
+              
+             await dispatch('retrieveEditionList')
 
              const { data } = await this.$axios.get(API.EDITION_ARTICLES_LIST(editionSlug))
-
+  
              data.data.forEach((article) => {
              	
              	  commit('updateEditionArticles',article)
@@ -169,7 +199,7 @@ export const actions = {
              
              const { data } = await this.$axios.get(API.EDITION_LIST_URL)
                
-            dispatch('common/updateSidebarItems',{items:data,type: 'edition', to: 'edition/',icon: 'file'},{root:true})
+             dispatch('common/updateSidebarItems',{items:data,type: 'edition', to: 'edition/',icon: 'file'},{root:true})
 
 
              data.forEach((edition) => {

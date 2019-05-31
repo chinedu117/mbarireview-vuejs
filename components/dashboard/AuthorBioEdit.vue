@@ -60,7 +60,7 @@
 </template>
 <script>
 
-import HandlesRequest from '~/utils/RequestHandler.vue'
+import HandlesRequest from '~/utils/RequestHandler.js'
 export default {
 
 // middleware: ['middleware'],
@@ -71,7 +71,7 @@ data() {
 	return {
 		profile:{ 
 			  bio: null,
-		      pen_name: this.$store.getters['auth/getUser].name,
+		      pen_name: this.$store.getters['auth/getUser'].name,
 		      contacts: "",
 		      profile_img:""
 		 },
@@ -89,7 +89,7 @@ data() {
 
 created(){
      
-     if ($this.profile.bio === null ) {
+     if (this.profile.bio === null ) {
 
            this.editing.bio = true
      }

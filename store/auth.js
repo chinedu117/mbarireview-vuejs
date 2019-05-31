@@ -1,4 +1,3 @@
-import axios from 'axios'
 import * as API from '@/api'
 
 
@@ -87,7 +86,7 @@ import * as API from '@/api'
         getToken(state) {
              // const token = this.$cookies.get('x-access-token')
              
-             const betaplace = JSON.parse(localStorage.getItem('betaplace'))
+             // const betaplace = JSON.parse(localStorage.getItem('betaplace'))
 
             return state.token //== null ?  betaplace.auth.token : state.token
         },
@@ -105,18 +104,17 @@ import * as API from '@/api'
     
     async uploadProfileImage({getters},formData){
         
-        axios.defaults.headers.common['Authorization'] = getters.getToken
         
-           return await axios.post(API.AGENT_PROFILE_IMAGE_UPLOAD_URL,formData)
+           return await this.$axios.post(API.AGENT_PROFILE_IMAGE_UPLOAD_URL,formData)
               
     },
          
    async  retrieveUser({state, commit, getters}) {
 
-        axios.defaults.headers.common['Authorization'] =  getters.getToken
+        this.$axios.defaults.headers.common['Authorization'] =  getters.getToken
         try {
 
-         const  { data } = await axios.get(API.USER_INFO_URL)      
+         const  { data } = await this.$axios.get(API.USER_INFO_URL)      
            await  commit('saveUser', data)
         }catch(e){
            console.log("unable to retrieve user info")
@@ -127,11 +125,11 @@ import * as API from '@/api'
    async  logout({state, commit, getters}) {
         
         
-        axios.defaults.headers.common['Authorization'] = getters.getToken
+       
   
         if(getters.loggedIn){
              try {
-                   await axios.post(API.LOGOUT_URL)
+                   await this.$axios.post(API.LOGOUT_URL)
                   
                      commit('clearToken')
                      commit('clearUser')
@@ -152,7 +150,7 @@ import * as API from '@/api'
           
           
               await commit('clearUser')
-              const { data } = await  axios.post(API.REGISTER_URL,{
+              const { data } = await  this.$axios.post(API.REGISTER_URL,{
                          'name': params.name,
                          'password': params.password,
                          'email': params.email,
@@ -166,7 +164,7 @@ import * as API from '@/api'
   
      async login({state, commit}, credentials) {
           
-         const { data } = await axios.post(API.LOGIN_URL,{
+         const { data } = await this.$axios.post(API.LOGIN_URL,{
                                'username': credentials.username,
                                'password': credentials.password
                                })
@@ -179,7 +177,7 @@ import * as API from '@/api'
       },
       async socialLogin({state, commit},payload){
             
-           const { data } =  await axios.post(API.SOCIAL_LOGIN_URL(payload.provider),payload)
+           const { data } =  await this.$axios.post(API.SOCIAL_LOGIN_URL(payload.provider),payload)
 
              commit('saveToken',data.access_token)
                 
@@ -188,9 +186,9 @@ import * as API from '@/api'
       
       async submitProfile({getters,dispatch},profile){
 
-        axios.defaults.headers.common['Authorization'] = getters.getToken
        
-        await axios.post(API.SUBMIT_PROFILE_URL,profile)
+       
+        await this.$axios.post(API.SUBMIT_PROFILE_URL,profile)
                 
         await dispatch("retrieveUser")
                
@@ -198,9 +196,9 @@ import * as API from '@/api'
     },
       
       async getMyProfile({getters}){
-        axios.defaults.headers.common['Authorization'] = getters.getToken
+       
          
-          let  response =  await  axios.get(API.GET_MY_PROFILE_URL)
+          let  response =  await  this.$axios.get(API.GET_MY_PROFILE_URL)
            
            commit('updateProfile',response.data)
       
@@ -210,18 +208,18 @@ import * as API from '@/api'
 
          if(!getters.getUser.email) return
         
-         return  await axios.post(API.RESEND_VERIFICATION_MAIL_URL,{el:getters.getUser.email})
+         return  await this.$axios.post(API.RESEND_VERIFICATION_MAIL_URL,{el:getters.getUser.email})
                 
     },
 
    async forgotPassword({getters},payload){
-          return await  axios.post(API.FORGOT_PASSWORD_URL,payload)
+          return await  this.$axios.post(API.FORGOT_PASSWORD_URL,payload)
     
     },
 
     async resetPassword({getters},payload){
       
-           return await axios.post(API.RESET_PASSWORD_URL,payload)
+           return await this.$axios.post(API.RESET_PASSWORD_URL,payload)
          
     },
 

@@ -90,7 +90,7 @@
 import HandleRequest from '@/utils/RequestHandler.js'
 export default {
   // middleware: ['authenticated','verified-email'],
-  layout: 'dashboard',
+  layout: 'default',
   data(){
       return {
 

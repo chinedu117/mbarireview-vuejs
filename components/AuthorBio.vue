@@ -45,7 +45,7 @@
 </template>
 <script>
 export default {
-
+   name: 'author-bio',
    data() {
       return {
 
@@ -64,16 +64,4 @@ export default {
    }
 }
 </script>
-
-<style>
-   .author-bio {
-
-   }
-   .author-info {
-
-   }
-   .author-avatar {
-
-   }
-</style>
 

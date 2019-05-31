@@ -12,6 +12,7 @@
 	 			</div>
 	 			<v-container
 	                v-for="(item,index) in submissions"
+                     :key="index"
                      @click="edit(item.id)"
                      class="hover"
 	 			 >

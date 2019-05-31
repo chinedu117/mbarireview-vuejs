@@ -10,21 +10,7 @@ const defaults = {
                 title: 'Home',
                 to: '/'
               },
-              {
-                icon: 'bubble_chart',
-                title: 'Non-Fiction',
-                to: '/category/fiction'
-              },
-               {
-                icon: 'bubble_chart',
-                title: 'Non-Fiction',
-                to: '/category/non-fiction'
-              },
-               {
-                icon: 'bubble_chart',
-                title: 'Non-Fiction',
-                to: '/inspire'
-              }
+              
             ],
     },
     
@@ -122,17 +108,20 @@ export const mutations = {
             
              
                  let newItems = value.items.map((item) =>{
-                        item.sidebar_item_type = value.type
-                        item.to = value.to + item.slug
-                        item.icon = value.icon
-                        return item
+                       return {
+                                icon:  'file',
+                                title:  item.title,
+                                to: value.to + item.slug,
+                              }
+                        // item.sidebar_item_type = value.type
+                        // item.to = value.to + item.slug
+                        // item.icon = value.icon
+                        // return item
                  })
                   
-                 var items = state.sidebar.items.concat(newItems)
-               
-                 state.sidebar = Object.assign({}, defaults.sidebar, {items: items })
-               
-             
+                 state.sidebar.items = state.sidebar.items.concat(newItems)
+                 
+            
         },
 
 

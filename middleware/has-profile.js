@@ -10,7 +10,7 @@ export default function ({ store, redirect }) {
                     msg: 'Verify your email to proceed',
                     color: ''
                })
-                return redirect('/agent/verify-email')
+                return redirect('/auth/verify-email')
              }
 
         if(!hasProfile){ 
@@ -20,7 +20,7 @@ export default function ({ store, redirect }) {
                     msg: 'Set up your profile to upload your places',
                     color: ''
                })
-                 return redirect('/agent/profile/create')
+                 return redirect('/auth/profile/create')
             }
 
 }

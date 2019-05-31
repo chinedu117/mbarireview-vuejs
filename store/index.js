@@ -22,11 +22,11 @@ export const mutations = {
 
 export const actions = {
 
-	 async nuxtServerInit ({dispatch,commit},{ req, route, app, store }) {
+	 // async nuxtServerInit ({dispatch,commit},{ req, route, app, store }) {
 	 	 
 	 	          // await dispatch('checkForCallForSubmission')
 	 	          //  await dispatch('articles/retrieveCategoryList')
-     },
+     // },
 
 
      async checkForCallForSubmission({commit,dispatch}){

@@ -6,8 +6,8 @@
 	  		<v-flex md12 xs12> 
                 <header>
 
-                	 <span class="grey--text"><v-chip>Non fiction</v-chip> In: The Nature  </span>
-                	<h1 class="display-3 my-2"> This is the title</h1>
+                	 <span class="grey--text"><v-chip>{{ article.category.title }}</v-chip> In: {{ article.edition.title }}  </span>
+                	<h1 class="display-3 my-2"> {{ article.title }}</h1>
 
                 	<v-list-tile>
                 		<v-list-tile-avatar>
@@ -16,8 +16,8 @@
                      	 >	</v-img>
                      	</v-list-tile-avatar>
                      	 <v-list-tile-content>
-                     	 	<h3>Emeka Obi</h3>
-                     	 	<span>20-10-2019</span>
+                     	 	<h3>{{ article.author.name }}</h3>
+                     	 	<span>{{ article.created_at }}</span>
                      	 </v-list-tile-content>
                 	</v-list-tile>
                       
@@ -33,29 +33,7 @@
 
 	            <article>
 	                
-	            	<p>
-	                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. Nesciunt minus, facere cumque repudiandae, molestiae adipisci culpa, sit sequi quos maxime error consectetur eveniet at asperiores et hic quibusdam corporis voluptas.
-	               </p>
-
-	               <h3 class="headline"> This is the title</h3>
-	            	<p>
-	                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. Nesciunt minus, facere cumque repudiandae, molestiae adipisci culpa, sit sequi quos maxime error consectetur eveniet at asperiores et hic quibusdam corporis voluptas.
-	               </p>
-
-	               <h3 class="headline"> This is the title</h3>
-	            	<p>
-	                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. Nesciunt minus, facere cumque repudiandae, molestiae adipisci culpa, sit sequi quos maxime error consectetur eveniet at asperiores et hic quibusdam corporis voluptas.
-	               </p>
-
-	               <h3 class="headline"> This is the title</h3>
-	            	<p>
-	                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. Nesciunt minus, facere cumque repudiandae, molestiae adipisci culpa, sit sequi quos maxime error consectetur eveniet at asperiores et hic quibusdam corporis voluptas.
-	               </p>
-
-	               <h3 class="headline"> This is the title</h3>
-	            	<p>
-	                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente officia dignissimos deleniti vel distinctio neque, atque, cum excepturi sit explicabo harum, amet cupiditate minus ad labore ea tempore nisi quod voluptatem unde maxime. Nesciunt minus, facere cumque repudiandae, molestiae adipisci culpa, sit sequi quos maxime error consectetur eveniet at asperiores et hic quibusdam corporis voluptas.
-	               </p>
+	            	{{ article.fulltext }}
                  
 
 
@@ -86,18 +64,18 @@ layout: 'default',
 //  return { }
 // },
 
-// async fetch({store,params}){
+async fetch({store,params}){
     
-//     await store.dispatch("storeNamespace/storeAction")
+    await store.dispatch("articles/retrieveArticle",params.article)
         
-// },
+},
 
 computed:{
    
-   // storeAction(){
+   article(){
 
-   //       return this.$store.getters['storeNamespace/storeGetter']
-   // }
+         return this.$store.getters['articles/article']
+   }
 },
 methods:{
     

@@ -7,8 +7,18 @@
 
     
     <!-- the snackbar or toast section for displaying errors and success messages -->
-    <v-snackbar
     
+
+
+    <v-content>
+ <!--      <v-container fluid flat> -->
+        <!-- <call-for-submission/> -->
+        <nuxt />
+      <!-- </v-container> -->
+    </v-content>
+
+
+    <v-snackbar
     :right="$vuetify.breakpoint.lgAndUp"
     v-model="snackBarActive"
     :timeout="$store.state.common.snackBar.timeout"
@@ -27,13 +37,7 @@
         </v-btn>
    </v-snackbar>
 
-
-    <v-content>
- <!--      <v-container fluid flat> -->
-        <!-- <call-for-submission/> -->
-        <nuxt />
-      <!-- </v-container> -->
-    </v-content>
+   
    <app-footer></app-footer>
     
 

@@ -1,4 +1,4 @@
-export default ({store.axios}) => {
+export default ({store,axios}) => {
  
     if(store.state.auth.token)
     {
