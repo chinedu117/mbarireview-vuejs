@@ -1,22 +1,23 @@
 <template>
-    <div class="list-display">
-       <div v-if="list.length > 0">
-         
-       
-       <article-list-item
-          v-for="(item,index) in list"
-                :key="index"
-                :item="item"
-       ></article-list-item>
-        
-       </div>
-       <div v-else>
+    <div>
+      <div class="list-display" v-if="list.length > 0">
 
-         <h3>Oops Nothing here</h3>
          
+         <article-list-item
+            v-for="(item,index) in list"
+                  :key="index"
+                  :item="item"
+         ></article-list-item>
+          
+      
        </div>
+        <div v-else>
 
-     </div>
+           <h3>Oops Nothing here</h3>
+           
+         </div>
+
+    </div>
 </template>
 <script type="text/javascript">
 import ArticleListItem from '~/components/ArticleListItem.vue'
@@ -54,7 +55,7 @@ export default {
 
    @media (min-width: 900px) {
     .list-display {
-      display: flex;
+      display: flex !important;
       width: 80%;
       padding: 20px;
     }

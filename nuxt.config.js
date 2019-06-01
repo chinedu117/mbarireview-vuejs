@@ -2,7 +2,7 @@ const pkg = require('./package')
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 
 module.exports = {
-  mode: 'universal',
+  mode: 'spa',
 
   /*
   ** Headers of the page
@@ -53,9 +53,9 @@ module.exports = {
   */
   plugins: [
     '~/plugins/vuetify',
-    // '~/plugins/app',
-    // { src: '~/plugins/localStorage.js', ssr: false },
-    // '~/plugins/http',
+    '~/plugins/app',
+    { src: '~/plugins/localStorage.js', ssr: false },
+    '~/plugins/axios',
     
     
   ],

@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import VueSocialauth from 'vue-social-auth'
 // Vue.use(ReadMore)
+import VeeValidate from 'vee-validate' 
+
+Vue.use(VeeValidate)
+
 Vue.use(VueSocialauth, {
 
   providers: {
