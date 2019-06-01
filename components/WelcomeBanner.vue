@@ -1,13 +1,17 @@
 
  <template>
-    <div class="welcome-banner" :style=" $store.state.common.skin.nightMode ? 'background-color:#29272d' : 'background-color:#f9f9f9' ">
+
+       <div class="welcome-banner" :style=" $store.state.common.skin.nightMode ? 'background-color:#29272d' : 'background-color:#f9f9f9' ">
            
            <div class="welcome-content">
-               <logo style="width: 300px; height: 300px; margin-left: 20px"/>
+               <logo style="width: 300px; height: 300px; margin-left: 20px" v-if="$vuetify.breakpoint.mdAndUp"/>
                <div class="welcome-message">
                     <h3>Mbari Reviews</h3>
-                   <div> Remembering and Celebrating<br>
-                         Who we are, our origin and our values.
+                   <div> <p>Remembering and Celebrating<br>
+                         Who we are, our origin and our values.<br>
+                         Welcome to Mbari Reviews.<br>
+                          </p>
+                          <v-btn outline @click="createSubmission">WRITE YOUR OWN STORY</v-btn>
                    </div>
                </div>
                
@@ -75,5 +79,7 @@ export default {
    height: 70vh;
 
 }
+
+
 }
  </style>

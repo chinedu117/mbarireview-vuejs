@@ -17,12 +17,10 @@ export default {
  
    components: { ArticleList, WelcomeBanner}, 
 
-    // middleware: ['default-sidebar-items'],
+    middleware: ['default-sidebar-items'],
 
     layout: 'default',
-  
 
-   // components: { }, 
    
    async fetch({store,params}){
 
