@@ -23,6 +23,10 @@
                       
 
                 </header>
+             </v-flex>
+         </v-layout>
+     </v-container>
+
                 <section class="section-across">
                 	<v-img
                      	src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
@@ -31,6 +35,10 @@
 
                 </section>
 
+
+	  <v-container>
+		  	<v-layout row wrap>
+		  		<v-flex md12 xs12> 
 	            <article>
 	                
 	            	{{ article.fulltext }}
@@ -88,7 +96,8 @@ methods:{
 <style lang="stylus" scoped>
 
 .section-across 
-	margin: 0 -200px
+	margin: 0 0px
+	max-width: 100%
 .main_link,.sub_link
 	color: red
 	text-decoration: none
