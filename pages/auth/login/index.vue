@@ -165,7 +165,14 @@
            let slug = ''
            slug = this.$store.getters['auth/getUser'].slug
            
-           this.$router.push({ path: `/dashboard/${slug}`})
+           if(slug){
+           	  this.$router.push({ path: `/dashboard/${slug}`})
+           }else{
+
+           	  this.$store.dispatch('common/updateSnackBar',{show: true, msg: "Unable to login"})
+           }
+           
+
 
            
 		}

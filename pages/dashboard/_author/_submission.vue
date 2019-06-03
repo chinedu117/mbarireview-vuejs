@@ -15,7 +15,7 @@
 	  		<v-flex md12 xs12> 
                 <header>
 
-                	 <span class="grey--text" v-if="!editing.category" @click="editing.category = true"><v-chip>{{ category }}</v-chip> In: The Nature  </span>
+                	 <span class="grey--text" v-if="!editing.category" @click="editing.category = true"><v-chip>{{ category }}</v-chip> In: {{ edition }}  </span>
 
                      <v-select 
                       v-model="submission.category_id" 
@@ -25,10 +25,11 @@
                       :items="categories"
                       item-value="id"
                       item-text="title"
+                      @blur="editing.category = false"
                       ></v-select>
 
 
-                	<h1 class="display-3 my-2" v-if="!editing.title"  v-text="submission.title" @click="editing.title = true"></h1>
+                	<h1 class="display-3 my-2" v-if="!editing.title"  @click="editing.title = true">{{ submission.title }}</h1>
                     <v-text-field v-else autofocus v-model="submission.title" outline size="24px"  @blur="editing.title = false"></v-text-field>
 
 
@@ -40,7 +41,7 @@
                      	</v-list-tile-avatar>
                      	 <v-list-tile-content>
                      	 	<h3>Emeka Obi</h3>
-                     	 	<span>20-10-2019</span>
+                        <span>{{ today }}</span>
                      	 </v-list-tile-content>
                 	</v-list-tile>
                       
@@ -55,6 +56,13 @@
                 </section>
 
 	            <article>
+                 
+                 <blockquote>
+                   <p v-if="!editing.intro_text"  v-html="submission.intro_text" @click="editing.intro_text = true"> </p>
+                   <v-textarea outline row="20" cols="20" autofocus v-else v-model="submission.intro_text"  @blur="editing.intro_text = false"></v-textarea>
+                 </blockquote>
+                 
+
 	                
 	               <p v-if="!editing.fulltext"  v-html="submission.fulltext" @click="editing.fulltext = true"> </p>
                    <v-textarea outline row="20" cols="20" autofocus v-else v-model="submission.fulltext"  @blur="editing.fulltext = false"></v-textarea>
@@ -81,14 +89,15 @@ layout: 'default',
 components: { AuthorBioEdit }, 
  data(){
  	  return {
+        
+        submission: this.$store.getters['dashboard/getSubmission'] || {
+                     category_id: null,
+                     title: "Click here to enter Title ",
+                     fulltext: `Click here to Write the full story`,
+                     intro_text: "Click here to Write the summary",
+                     images: ""
+                    },
 
- 	  	 submission: {
- 	  	  	  category_id: null,
- 	  	      title: "",
- 	  	  	  fulltext: `Write the full story here`,
-              intro_text: "Write the summary here",
-              images: ""
- 	  	  },
  	  	  editing: {
  	  	  	  category: false,
  	  	  	  title: false,
@@ -102,63 +111,92 @@ components: { AuthorBioEdit },
  },
 
 
-async asynData({store,params}){
-
-     store.dispatch("dashboard/retrieveSubmittableCategories")
-     if(params.submission){
-
-        let { data }  =  await store.dispatch("dashboard/retrieveSubmission",{slug: params.submission})
-          
-          return { 
-          	  submission: data,
-          	  editing: {
- 	  	  	  category: false,
- 	  	  	  title: false,
- 	  	  	  intro_text: false,
- 	  	  	  fulltext: false,
- 	  	  	  images: false
-
- 	  	  }}
+async fetch({store,params}){
+   
+     await store.dispatch("dashboard/retrieveSubmittableCategories")
+     if(params.submission !== 'new'){
+ 
+        await store.dispatch("dashboard/retrieveSubmission",{slug: params.submission})
+        
      }
-
-    return { 
-            editing: {
- 	  	  	  category: true,
- 	  	  	  title: true,
- 	  	  	  intro_text: false,
- 	  	  	  fulltext: false,
- 	  	  	  images: false
-
- 	  	  }
- 	  	}
+    
 },
 
 
 computed:{
    category(){
+       
+       if(this.submission.category_id !== null)
+       {
+          let category = this.$store.getters['dashboard/getCategories'].find((item) => {
+            return item.id == this.submission.category_id
+        })
 
-   	    let category = this.$store.getters['dashboard/getCategories'].find((item) => {
-   	    	  return item.id == this.article.category_id
-   	    })
+         return category.title
+       }
 
-   	   return category.title
+       return  "Select Category"
+   	    
    },
 
    	categories(){
    		 return this.$store.getters['dashboard/getCategories']
    	},
 
+    edition(){
+
+        return this.$store.getters['nextEdition']
+    },
+
+    today() {
+        
+
+        return "Today"
+    }
+
+    // submission(){
+         
+    //      let subm = this.$store.getters['dashboard/getSubmission']
+    //      if (subm) {
+    //           return subm
+    //      }else{
+
+    //         return {
+    //              category_id: null,
+    //              title: "",
+    //              fulltext: `Click here to Write the full story`,
+    //              intro_text: "Click here to Write the summary",
+    //              images: ""
+    //             }
+    //      }
+        
+
+      
+    // }
+
 },
 methods:{
      
      	save(){
-     		 
+     		  
+          let slug = this.$route.params.submission
+          let authorSlug = this.$route.params.author
+         
      		  this.$store.dispatch('dashboard/makeSubmission',this.submission)
-          this.editing(true)
+            .then((response) => {
+
+                slug  =  response.data.slug
+            })
+           
+
+          this.editingValues(true)
+
+          this.$router.push({path: `/dashboard/${authorSlug}/${slug}`})
+
      	},
 
      	discard(){
-          this.editing(false)
+          this.editingValues(false)
      		  let authorslug = this.$route.params.author
      		  this.$router.push({path: `dashboard/${authorslug}`})
      	},
@@ -166,15 +204,15 @@ methods:{
      	submit(){
      		 
      		  this.$store.dispatch('dashboard/makeSubmission',this.submission)
-          this.editing(false)
+          this.editingValues(false)
      	},
 
-       editing(val){
-           editing.category = val
-           editing.title = val
-           editing.intro_text = val
-           editing.fulltext = val
-           editing.images = val
+       editingValues(val){
+           this.editing.category = val
+           this.editing.title = val
+           this.editing.intro_text = val
+           this.editing.fulltext = val
+           this.editing.images = val
        }
 
 },

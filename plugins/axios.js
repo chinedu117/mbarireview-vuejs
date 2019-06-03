@@ -1,15 +1,27 @@
 export default function ({$axios, store}){
 	
-	if(store.state.auth.token)
-    {
-       $axios.onRequest((config) => {
-            const token = store.state.auth.token
-           config.headers.common['Authorization'] = token 
-	    })
-    }
+    	if(store.state.auth.token)
+        { 
+             
+            
+
+             $axios.onRequest(function(config) {
+                   
+                   const token = store.state.auth.token
+                   console.log("New Token is   "+ token)
+                   
+                   config.headers.common['Authorization']  = token
+
+                   return config
+                 
+      	    })
+
+              // $axios.setToken(token)
+
+        }
 
 
-    // Intercept the response and refresh (one retry) if invalid token.
+        // Intercept the response and refresh (one retry) if invalid token.
         $axios.onResponse(function (response) {
             
             // console.log('intercepted');
@@ -38,7 +50,7 @@ export default function ({$axios, store}){
                 
             }
 
-          if(error.response.data.message !== undefined && error.response.data.message !== '')
+          if(error.response !== undefined && error.response.data.message !== undefined && error.response.data.message !== '')
             {
                  //reply to errors due to network problems
 

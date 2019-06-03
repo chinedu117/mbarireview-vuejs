@@ -103,8 +103,9 @@ methods:{
     },
 
     write(){
-      
-          this.$router.push({name: 'dashboard_author_submission'})
+           let author = this.$route.params.author
+          
+          this.$router.push({path: `/dashboard/${author}/new`})
     },
 
     edit(slug){

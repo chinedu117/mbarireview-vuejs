@@ -106,15 +106,14 @@ export const actions = {
 
       async makeSubmission({commit,dispatch},data){
               
-            await this.$axios.post(API.DASHBOARD_SUBMISSION_SUBMIT_URL,data)
+           return await this.$axios.post(API.DASHBOARD_SUBMISSION_SUBMIT_URL,data)
                     
        },
 
 
-
-       async retrieveSubmittableCategories({commit,dispatch}){
+       async retrieveSubmittableCategories({state,commit,dispatch}){
                
-               if (state.categories.length > 0) {
+               if (state.categories.length < 1) {
                    
                    let {data } = await this.$axios.get(API.CATEGORY_LIST_SUBMITTABLE_URL)
 

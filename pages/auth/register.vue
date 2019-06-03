@@ -136,7 +136,7 @@
                        
 						
 						this.$store.commit('common/updateLoader',false)
-						this.$router.push({ path: "/agent/verify-email"})
+						this.$router.push({ path: "/auth/verify-email"})
  
 						}))
 

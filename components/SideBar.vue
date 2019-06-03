@@ -33,7 +33,28 @@
             <v-list-tile-title v-text="item.title" />
           </v-list-tile-content>
         </v-list-tile>
+          
+        <v-list-tile @click="logout" v-if="loggedIn">
+          <v-list-tile-action>
+            <v-icon>user</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title >
+              Logout
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
 
+        <v-list-tile @click="login" v-if="!loggedIn">
+          <v-list-tile-action>
+            <v-icon>user</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title >
+              Login
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
 
       </v-list>
     </v-navigation-drawer>
@@ -82,7 +103,11 @@
 			items(){
 
 				return this.$store.state.common.sidebar.items
-			} 
+			},
+
+        loggedIn(){
+            return this.$store.getters['auth/loggedIn']
+        },
 
            
 		 	
@@ -94,6 +119,19 @@
               this.visible = false
 	   	  	    this.$store.dispatch('common/toggleSkin')
 	   	  },
+
+        logout(){
+           
+           this.$store.dispatch('auth/logout')
+            this.visible = false
+        },
+
+        login(){
+             
+            this.visible = false
+            this.$router.push({path: '/auth/login'})
+            
+        },
 
          
 	   }

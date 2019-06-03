@@ -12,7 +12,8 @@ var HandleRequest = {
         this.loading = true
 
         promiseCallBack.catch(error => {
-            // console.log(error)
+            console.log(error)
+            return
             //  console.log(error.response.data)
             const status = error.response.status
             let message = ''

@@ -38,7 +38,7 @@
                                      <h3 class="headline" v-else @click="editing.pen_name = true">{{ profile.pen_name }}</h3>
 
 
-					            	 <v-textarea label="Bio" autofocus v-if="editing.bio" @blur="editing.bio = false"outline row="6" v-model="profile.bio">
+					            	 <v-textarea label="Bio" autofocus v-if="editing.bio" @blur="editing.bio = false"outline row="6" v-model="profile.bio" placeholder="About the author">
 					            	 	
 					            	 </v-textarea>
 
@@ -70,7 +70,7 @@ mixins: [ HandlesRequest ],
 data() {
 	return {
 		profile:{ 
-			  bio: null,
+			  bio: "Click here to write about yourself here",
 		      pen_name: this.$store.getters['auth/getUser'].name,
 		      contacts: "",
 		      profile_img:""
@@ -94,7 +94,12 @@ created(){
            this.editing.bio = true
      }
 
-     this.profile = this.$store.getters['auth/getProfile']
+     let profile = this.$store.getters['auth/getProfile']
+
+     if (profile) {
+
+     	   this.profile = profile
+     }
 
 },
 
@@ -104,15 +109,15 @@ methods:{
     save(){
          
          this.mixin_handleRequest(this.$store.dispatch('auth/submitProfile',this.profile))
-          this.editing(false)
+          this.editingValues(false)
     },
 
     edit(){
 
-    	  this.editing(true)
+    	  this.editingValues(true)
     },
 
-    editing(val){
+    editingValues(val){
 
          this.editing.bio = val
     	  this.editing.pen_name = val

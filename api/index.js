@@ -83,7 +83,6 @@ export const CATEGORY_LIST_URL = baseUrl +  "/list/category"
  */
 export const CATEGORY_LIST_SUBMITTABLE_URL = baseUrl +  "/list/category/submittable"
 
-
 /**
  * Returns call for submission info for public
  *
@@ -165,14 +164,14 @@ export const RESET_PASSWORD_URL = baseUrl + '/reset-password'
     Shows user information after authentication 
     Returns json 200 user or 404 not found
 */
-export const USER_INFO_URL = baseUrl + "/user"
+export const USER_INFO_URL = baseUrl + "/auth/user"
 
 
 
 
 
 export const SUBMIT_PROFILE_URL  = baseUrl + '/profile-submit'
-export const GET_MY_PROFILE_URL  = baseUrl + '/profile'
+export const GET_MY_PROFILE_URL  = baseUrl + '/auth/profile'
 
 export const AGENT_PROFILE_IMAGE_UPLOAD_URL = baseUrl + '/profile-img'
 
@@ -197,7 +196,7 @@ export const AGENT_PROFILE_IMAGE_UPLOAD_URL = baseUrl + '/profile-img'
  *
  * @return return json 200 
  */
- export const DASHBOARD_SUBMISSION_HISTORY_URL = baseUrl + "/submissions"
+ export const DASHBOARD_SUBMISSION_HISTORY_URL = baseUrl + "/own/author/submissions"
 
 /**
  * Shows a submissin details
@@ -230,4 +229,4 @@ export const AGENT_PROFILE_IMAGE_UPLOAD_URL = baseUrl + '/profile-img'
  * @post fulltext , intro_text, category_id, edition_id, 
  * @return return
  */
- export const DASHBOARD_SUBMISSION_SUBMIT_URL = baseUrl + "/submission"
+ export const DASHBOARD_SUBMISSION_SUBMIT_URL = baseUrl + "/submit/submission"

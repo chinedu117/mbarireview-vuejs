@@ -5,14 +5,7 @@ import * as API from '@/api'
      return {
         token: null, //JSON.parse(localStorage.getItem('betaplace')).auth.token || null,
         user: null, //Object.assign({},JSON.parse(localStorage.getItem('user'))) || null,
-        profile:{
-            
-              country:"Nigeria",
-              name: 'Mmaduagwu Malachy',
-              bio: " Loves writing about life and nature",
-              contacts: 'https://facebook.com/malachy-mmaduagwu',
-
-          },
+        profile: null,
      }
         
     }
@@ -21,7 +14,10 @@ import * as API from '@/api'
 
 
         updateProfile (state, value) {
-                state.profile =  value
+               if(value.profile){
+                   state.profile =  value.profile
+
+               }
               },
         saveUser(state, user) {
             
@@ -35,6 +31,7 @@ import * as API from '@/api'
 
           clearUser(state){
             state.user = ""
+            state.profile = ""
             // localStorage.removeItem('user')
           },
       
@@ -43,10 +40,10 @@ import * as API from '@/api'
                
               const access_token  = 'Bearer ' + token
                state.token = access_token
-               this.$cookies.set('x-access-token',access_token,{
-                                      path: '/',
-                                      maxAge: 60 * 60 * 24 * 7
-                                    })
+               // this.$cookies.set('x-access-token',access_token,{
+               //                        path: '/',
+               //                        maxAge: 60 * 60 * 24 * 7
+               //                      })
                // this.$cookies.set('x-access-token', access_token, 60 * 60 * 24 * 30)
       
               // localStorage.setItem('access_token',access_token)
@@ -59,7 +56,7 @@ import * as API from '@/api'
               state.token = null
               //localStorage.removeItem('user')
               state.user = null
-              this.$cookies.remove('x-access-token')
+              // this.$cookies.remove('x-access-token')
           },
 
           // setProfile(state,val){
@@ -95,7 +92,13 @@ import * as API from '@/api'
            // const betaplace = JSON.parse(localStorage.getItem('betaplace'))
             // console.log(betaplace.auth.token)
             return !!state.token //!= null //|| betaplace.auth.token != null
-        }
+        },
+
+
+         getProfile(state) {
+        
+                    return state.profile
+         }
 
 
     }
@@ -111,11 +114,12 @@ import * as API from '@/api'
          
    async  retrieveUser({state, commit, getters}) {
 
-        this.$axios.defaults.headers.common['Authorization'] =  getters.getToken
+        // this.$axios.defaults.headers.common['Authorization'] =  getters.getToken
         try {
 
          const  { data } = await this.$axios.get(API.USER_INFO_URL)      
            await  commit('saveUser', data)
+           await commit('updateProfile',data)
         }catch(e){
            console.log("unable to retrieve user info")
         }
@@ -179,7 +183,7 @@ import * as API from '@/api'
             
            const { data } =  await this.$axios.post(API.SOCIAL_LOGIN_URL(payload.provider),payload)
 
-             commit('saveToken',data.access_token)
+            await commit('saveToken',data.access_token)
                 
       },
 
@@ -195,7 +199,7 @@ import * as API from '@/api'
       
     },
       
-      async getMyProfile({getters}){
+      async getMyProfile({commit}){
        
          
           let  response =  await  this.$axios.get(API.GET_MY_PROFILE_URL)
@@ -212,7 +216,7 @@ import * as API from '@/api'
                 
     },
 
-   async forgotPassword({getters},payload){
+   async forgotPassword({state},payload){
           return await  this.$axios.post(API.FORGOT_PASSWORD_URL,payload)
     
     },

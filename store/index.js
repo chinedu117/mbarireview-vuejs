@@ -8,7 +8,8 @@ export const state = () => {
       submission: {
       	  calling: true,
       	  message: "We are accepting submission",
-      	  title: 'Call for submission'
+      	  title: 'Call for submission',
+          edition_title: null
       }
   }
 }
@@ -18,6 +19,14 @@ export const mutations = {
   checkForCallForSubmission (state, value) {
          state.submission =  value
        },
+}
+
+export const getters = {
+
+    nextEdition(state) {
+
+         return state.submission.edition_title
+    }
 }
 
 export const actions = {

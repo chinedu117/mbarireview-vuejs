@@ -18,7 +18,7 @@
               this.$store.dispatch('auth/logout')
               .then(response => {
                    
-                   this.$router.push({ path: '/agent/login'})
+                   this.$router.push({ path: '/auth/login'})
                    this.$store.dispatch('common/updateSnackBar',{
                         msg: 'You are logged out!',
                         color: 'red',
@@ -29,7 +29,7 @@
         
               })
               .catch(error => {
-                  this.$router.push({ path: '/agent/login'})
+                  this.$router.push({ path: '/auth/login'})
                 //   this.$store.dispatch('common/updateSnackBar',{
                 //                                    msg: 'Unable to Log out',
                 //                                    color: 'red',
