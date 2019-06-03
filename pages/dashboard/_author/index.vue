@@ -14,7 +14,7 @@
                   <v-container
 
                             v-for="(item,index) in submissions"
-                               @click="edit(item.id)"
+                               @click="edit(item.slug)"
                                class="hover"
                                :key="index"
                    >
@@ -36,7 +36,7 @@
                       <v-chip label small v-if="item.accepted === false" color="red darken-3" text-color="white" >rejected</v-chip>
                     </v-flex>
                     <v-flex xs3>
-                       <v-btn small @click="withdraw(item.id)">Withdraw</v-btn>
+                       <v-btn small @click="withdraw(item.slug)">Withdraw</v-btn>
                     </v-flex>
                   </v-layout> 
                   </v-container>

@@ -98,7 +98,7 @@ export const actions = {
        
        async   retrieveSubmission({commit,dispatch},params){
           
-            await this.$axios.get(API.DASHBOARD_SUBMISSION_DETAIL_URL(params.slug))
+            const { data } = await this.$axios.get(API.DASHBOARD_SUBMISSION_DETAIL_URL(params.slug))
             commit('updateSubmission',data)
       
        },

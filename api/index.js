@@ -218,7 +218,7 @@ export const AGENT_PROFILE_IMAGE_UPLOAD_URL = baseUrl + '/profile-img'
  */
  export const DASHBOARD_SUBMISSION_WITHDRAW_URL = (submissionSlug) => {
 
-            return baseUrl + '/submission/' + submissionSlug 
+            return baseUrl + '/submission/' + submissionSlug + '/withdraw'
 }
 
 

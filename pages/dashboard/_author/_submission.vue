@@ -202,9 +202,11 @@ methods:{
      	},
 
      	submit(){
-     		 
+     		  this.editingValues(false)
      		  this.$store.dispatch('dashboard/makeSubmission',this.submission)
-          this.editingValues(false)
+         
+          this.$router.push({path: `dashboard/${authorslug}`})
+
      	},
 
        editingValues(val){
