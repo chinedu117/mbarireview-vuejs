@@ -44,7 +44,7 @@
 
 					            	 <p  v-else @click="editing.bio = true">{{ profile.bio }}</p>
 
-					            	 <v-text-field label="Follow Link" outline ></v-text-field>
+					            	 <v-text-field label="Follow Link" v-model="profile.contacts" outline ></v-text-field>
 					            	 
 					            	
 			                     </v-card-text>
@@ -69,12 +69,12 @@ mixins: [ HandlesRequest ],
 
 data() {
 	return {
-		profile:{ 
+		profile: { 
 			  bio: "Click here to write about yourself here",
 		      pen_name: this.$store.getters['auth/getUser'].name,
 		      contacts: "",
 		      profile_img:""
-		 },
+		  },
 
 		 editing: {
 		 	bio: false,
@@ -89,7 +89,7 @@ data() {
 
 created(){
      
-     if (this.profile.bio === null ) {
+     if (this.profile.id === undefined ) {
 
            this.editing.bio = true
      }

@@ -170,7 +170,7 @@ export const USER_INFO_URL = baseUrl + "/auth/user"
 
 
 
-export const SUBMIT_PROFILE_URL  = baseUrl + '/profile-submit'
+export const SUBMIT_PROFILE_URL  = baseUrl + '/auth/profile/submit'
 export const GET_MY_PROFILE_URL  = baseUrl + '/auth/profile'
 
 export const AGENT_PROFILE_IMAGE_UPLOAD_URL = baseUrl + '/profile-img'

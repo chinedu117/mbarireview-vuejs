@@ -189,8 +189,6 @@ import * as API from '@/api'
 
       
       async submitProfile({getters,dispatch},profile){
-
-       
        
         await this.$axios.post(API.SUBMIT_PROFILE_URL,profile)
                 
