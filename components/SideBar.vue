@@ -19,12 +19,9 @@
         </v-list-tile>
 
 
-        <v-list-tile @click="visible = false"
+        <v-list-tile @click="goto(item.to)"
           v-for="(item, i) in items"
           :key="i"
-          :to="item.to"
-          router
-          exact
         >
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -34,6 +31,18 @@
           </v-list-tile-content>
         </v-list-tile>
           
+          <v-list-tile @click="dasboard" v-if="loggedIn">
+          <v-list-tile-action>
+            <v-icon>user</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title >
+              Dashboard
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+
         <v-list-tile @click="logout" v-if="loggedIn">
           <v-list-tile-action>
             <v-icon>user</v-icon>
@@ -47,7 +56,7 @@
 
         <v-list-tile @click="login" v-if="!loggedIn">
           <v-list-tile-action>
-            <v-icon>user</v-icon>
+            <v-icon>account</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title >
@@ -132,6 +141,19 @@
             this.$router.push({path: '/auth/login'})
             
         },
+
+        goto(link){
+           
+            this.$router.push({path:  '/' + link})
+            this.visible = false
+        },
+
+        dashboard(){
+            
+            var author = this.$store.getters['auth/getUser'].slug
+            this.$router.push({path: `/dashboard/${author}`})
+            this.visible = false
+        }
 
          
 	   }

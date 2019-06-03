@@ -63,7 +63,7 @@ export default {
 
 layout: 'default',
 
-
+middleware: ['default-sidebar-items'],
 // components: { }, 
 
 
