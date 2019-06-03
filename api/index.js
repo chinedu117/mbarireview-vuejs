@@ -6,7 +6,7 @@ const baseUrl = process.env.BASE_URL
  * @param  param
  * @return return
  */
-export const FEATURED_ARTICLES_LIST = baseUrl +  "/" 
+export const FEATURED_ARTICLES_LIST = baseUrl +  "/featured/articles" 
 
 
 

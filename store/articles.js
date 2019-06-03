@@ -141,7 +141,7 @@ export const actions = {
      async retrieveCategoryArticles({commit,dispatch,state},categorySlug){
               
              const { data } = await this.$axios.get(API.CATEGORY_ARTICLES_LIST(categorySlug))
-             console.log(data)
+  
              state.category.articles = []
              data.data.forEach((article) => {
 

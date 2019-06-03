@@ -105,13 +105,13 @@ methods:{
     write(){
            let author = this.$route.params.author
           
-          this.$router.push({path: `/dashboard/${author}/new`})
+          this.$router.push({path: `dashboard/${author}/new`})
     },
 
     edit(slug){
            
            let author = this.$route.params.author
-           this.$router.push({path: `/dashboard/${author}/${slug}`})
+           this.$router.push({path: `dashboard/${author}/${slug}`})
     }
 
 },
