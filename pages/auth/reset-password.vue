@@ -68,8 +68,8 @@
 <script>
 import HandlesRequest from '@/utils/RequestHandler'
 export default {
-    middleware: 'authenticated',
-    layout: 'dashboard',
+    middleware: 'anonymous',
+    layout: 'default',
     data(){
         return{
             email: this.$route.params.email,//encoded

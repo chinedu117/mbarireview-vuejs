@@ -65,7 +65,9 @@
 
 	                
 	               <p v-if="!editing.fulltext"  v-html="submission.fulltext" @click="editing.fulltext = true"> </p>
-                   <v-textarea outline row="20" cols="20" autofocus v-else v-model="submission.fulltext"  @blur="editing.fulltext = false"></v-textarea>
+                 <vue-editor autofocus v-else v-model="submission.fulltext"  @blur="editing.fulltext = false"></vue-editor>
+
+                <!--    <v-textarea outline row="20" cols="20" autofocus v-else v-model="submission.fulltext"  @blur="editing.fulltext = false"></v-textarea> -->
 
                      <author-bio-edit/>
 	            </article>
@@ -77,7 +79,7 @@
   </div>
 </template>
 <script>
-
+import { VueEditor } from "vue2-editor"
 import AuthorBioEdit from '~/components/dashboard/AuthorBioEdit.vue'
 export default {
 
@@ -86,7 +88,7 @@ export default {
 layout: 'default',
 
 
-components: { AuthorBioEdit }, 
+components: { AuthorBioEdit, VueEditor}, 
  data(){
  	  return {
         
@@ -186,26 +188,29 @@ methods:{
             .then((response) => {
 
                 slug  =  response.data.slug
+
+                this.editingValues(true)
+
+                this.$router.push({path: `/dashboard/${authorSlug}/${slug}`})
             })
            
 
-          this.editingValues(true)
-
-          this.$router.push({path: `/dashboard/${authorSlug}/${slug}`})
+          
 
      	},
 
      	discard(){
           this.editingValues(false)
      		  let authorslug = this.$route.params.author
-     		  this.$router.push({path: `dashboard/${authorslug}`})
+     		  this.$router.push({path: `/dashboard/${authorslug}`})
      	},
 
      	submit(){
      		  this.editingValues(false)
+          let authorslug = this.$route.params.author
      		  this.$store.dispatch('dashboard/makeSubmission',this.submission)
-         
-          this.$router.push({path: `dashboard/${authorslug}`})
+
+          this.$router.push({path: `/dashboard/${authorslug}`})
 
      	},
 

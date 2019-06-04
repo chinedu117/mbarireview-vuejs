@@ -26,7 +26,7 @@
 <script>
 import HandlesRequest from '@/utils/RequestHandler'
 export default {
-    middleware: ['authenticated','has-profile'],
+    middleware: ['anonymous'],
     layout: 'default',
     data(){
         return {
