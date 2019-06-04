@@ -19,6 +19,7 @@
     "nuxt": "^2.4.0",
     "vee-validate": "^2.2.8",
     "vue-social-auth": "^1.4.0",
+    "vue2-editor": "^2.7.2",
     "vuetify": "^1.5.5",
     "vuetify-loader": "^1.2.1",
     "vuex-persistedstate": "^2.5.4"
