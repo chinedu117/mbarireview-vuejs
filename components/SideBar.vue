@@ -31,7 +31,7 @@
           </v-list-tile-content>
         </v-list-tile>
           
-          <v-list-tile @click="dasboard" v-if="loggedIn">
+          <v-list-tile @click="dashboard" v-if="loggedIn">
           <v-list-tile-action>
             <v-icon>user</v-icon>
           </v-list-tile-action>

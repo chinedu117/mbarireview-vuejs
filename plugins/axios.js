@@ -62,6 +62,14 @@ export default function ({$axios, store}){
                      })
                      
                 }
+            }else{
+
+               store.dispatch('common/updateSnackBar',{
+                    show: true,
+                    msg: 'Failed: Something Happened',
+                    color: 'red'
+                    })
+
             }
 
             return Promise.reject(error)

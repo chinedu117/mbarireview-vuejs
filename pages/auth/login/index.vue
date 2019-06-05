@@ -125,16 +125,13 @@
             this.mixin_handleRequest(sm.$store.dispatch('auth/socialLogin',payload)
 			   .then((response) => {
 					// console.log('login Successfull')
-					return sm.mixin_handleRequest(sm.$store.dispatch('auth/retrieveUser')
-					   .then((response) => {
+				
 						     return sm.redirectAfterLogin(true)
 
-					})
-					)
-			})
-			)
+		
 
-
+             })
+			  )
             },
        
 	  	login() {
@@ -144,14 +141,8 @@
 			this.mixin_handleRequest(this.$store.dispatch('auth/login',this.credentials)
 			.then((response) => {
 					
-					return sm.mixin_handleRequest(sm.$store.dispatch('auth/retrieveUser')
-					  .then((response) => {
-						  
-						  
-						 return sm.redirectAfterLogin(false)
-                        
-					})
-				)
+				  return sm.redirectAfterLogin(false)
+           
 			})
 			)
 				 

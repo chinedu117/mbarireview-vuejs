@@ -114,7 +114,7 @@ import * as API from '@/api'
          
    async  retrieveUser({state, commit, getters}) {
 
-        // this.$axios.defaults.headers.common['Authorization'] =  getters.getToken
+        this.$axios.defaults.headers.common['Authorization'] =  getters.getToken
         try {
 
          const  { data } = await this.$axios.get(API.USER_INFO_URL)      
@@ -166,7 +166,7 @@ import * as API from '@/api'
   
       },
   
-     async login({state, commit}, credentials) {
+     async login({state, commit,dispatch}, credentials) {
           
          const { data } = await this.$axios.post(API.LOGIN_URL,{
                                'username': credentials.username,
@@ -175,15 +175,17 @@ import * as API from '@/api'
 
           await commit('saveToken',data.access_token)
            
-          
+          await dispatch('retrieveUser')
           
   
       },
-      async socialLogin({state, commit},payload){
+      async socialLogin({state, commit,dispatch},payload){
             
            const { data } =  await this.$axios.post(API.SOCIAL_LOGIN_URL(payload.provider),payload)
 
             await commit('saveToken',data.access_token)
+
+            await dispatch('retrieveUser')
                 
       },
 

@@ -10,10 +10,10 @@ var HandleRequest = {
     mixin_handleRequest(promiseCallBack){
         
         this.loading = true
-
+    
         promiseCallBack.catch((error) => {
             
-            //  console.log(error.response.data)
+             console.log(error)
             const status = error.response.status
             let message = ''
 
