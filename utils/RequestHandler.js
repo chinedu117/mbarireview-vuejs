@@ -11,9 +11,8 @@ var HandleRequest = {
         
         this.loading = true
 
-        promiseCallBack.catch(error => {
-            console.log(error)
-            return
+        promiseCallBack.catch((error) => {
+            
             //  console.log(error.response.data)
             const status = error.response.status
             let message = ''
@@ -29,6 +28,7 @@ var HandleRequest = {
                 //form validation error
                  message = error.response.data.message
                  this.serverErrors = error.response.data.errors
+
             }else{
                  
                 message = error.response.data.message
