@@ -13,13 +13,14 @@
       </v-layout>
     </v-container>
    
-   <div style="width:500px; margin: 0 auto">
+   <div class="card" style="width:500px; margin: 0 auto">
      <v-container>
       <v-layout row wrap>
         <v-flex md12 xs12> 
-               <v-select 
+                 <v-select 
+                     
                       v-model="submission.category_id" 
-                       
+                       placeholder="Select Category"
                       :label="category.title"
                       @change="editing.category = false" 
                       :items="categories"
@@ -27,29 +28,54 @@
                       item-text="title"
                       @blur="editing.category = false"
                       ></v-select> 
+              
                </v-flex>
              </v-layout>
            
              <v-layout>  
                <v-flex md12 xs12> 
-                 <v-text-field  v-model="submission.title" outline size="24px"  @blur="editing.title = false"></v-text-field>
-                 </v-flex>
+                   <v-text-field 
+                 
+                    placeholder="Enter Title"
+                    v-model="submission.title" 
+                    outline size="24px"  
+                    @blur="editing.title = false"
+                    ></v-text-field>
+                
+
+                   </v-flex>
              </v-layout>
 
              <v-layout> 
                <v-flex md12 xs12> 
 
-                    <input type="file" name="upload" id="upload" accept="application/pdf" @change="uploadFile">
+                    <input  
+                    type="file" 
+                    name="upload" 
+                    id="upload" 
+                    accept="application/pdf" 
+                    @change="uploadFile"
+                    >
+                    
+                     <v-btn  
+                   
+                      @click="download(viewable.slug)"
+                      >
+                      DOWNLOAD
+                    </v-btn>
+                     <iframe id="download-frame" style="display:none"></iframe>
                </v-flex>
              </v-layout>
            </v-container>
 
+            
    </div>
    </form>
   </div>
 </template>
 <script>
 // import AuthorBioEdit from '~/components/dashboard/AuthorBioEdit.vue'
+import { DASHBOARD_SUBMISSION_DOWNLOAD_URL } from '~/api'
 export default {
 
 // middleware: ['middleware'],
@@ -59,28 +85,28 @@ layout: 'default',
 
 // components: { AuthorBioEdit }, 
  data(){
- 	  return {
+    return {
         
         submission: {
-                     category_id: null,
-                     title: "Click here to enter Title ",
-                     fulltext: `Click here to Write the full story`,
-                     intro_text: "Click here to Write the summary",
+                     category_id:null,
+                     title: "",
+                     fulltext: "Hey",
+                     intro_text: "Hey",
                      images: "",
                      attachment: null
                     },
 
- 	  	  editing: {
- 	  	  	  category: false,
- 	  	  	  title: false,
- 	  	  	  intro_text: false,
- 	  	  	  fulltext: false,
- 	  	  	  images: false
+        editing: {
+            category: false,
+            title: false,
+            intro_text: false,
+            fulltext: false,
+            images: false
 
- 	  	  },
+        },
        fileUrl: null,
        fileBlob: null
- 	  }
+    }
  },
 
 
@@ -97,6 +123,13 @@ async fetch({store,params}){
 
 
 computed:{
+   
+   viewable(){
+        
+        return this.$store.getters['dashboard/getSubmission']
+
+   },
+
    category(){
        
        if(this.submission.category_id !== null)
@@ -109,23 +142,23 @@ computed:{
        }
 
        return  "Select Category"
-   	    
+        
    },
 
-   	categories(){
-   		 return this.$store.getters['dashboard/getCategories']
-   	},
+    categories(){
+       return this.$store.getters['dashboard/getCategories']
+    },
 
     edition(){
 
         return this.$store.getters['nextEdition']
     },
 
-    today() {
+    // today() {
         
 
-        return "Today"
-    }
+    //     return "Today"
+    // }
 
     // submission(){
          
@@ -149,6 +182,12 @@ computed:{
 
 },
 methods:{
+      
+      download(slug){
+            
+            // this.$store.dispatch("dashboard/downloadSubmission",slug)
+            document.getElementById("download-frame").src = DASHBOARD_SUBMISSION_DOWNLOAD_URL(slug)
+      },
 
       uploadFile(e){
         const files = e.target.files
@@ -161,7 +200,7 @@ methods:{
         
              fr.addEventListener('load', () => {
                   this.fileUrl = fr.result
-                  
+                   // document.getElementById("download-frame").src = fr.result
                   // console.log(fr.result)
 
                   this.submission.attachment = this.convertFileToBlob(fr.result,mime)
@@ -200,8 +239,8 @@ methods:{
     },
 
 
-     	save(){
-     		  
+      save(){
+          
           let slug = this.$route.params.submission
           let authorSlug = this.$route.params.author
           
@@ -215,7 +254,7 @@ methods:{
           }
 
 
-     		  this.$store.dispatch('dashboard/makeSubmission',data)
+          this.$store.dispatch('dashboard/makeSubmission',data)
             .then((response) => {
 
                 slug  =  response.data.slug
@@ -228,7 +267,7 @@ methods:{
 
           
 
-     	},
+      },
       withdraw(){
         // alert("Withdrawing submission:  Not Implemented")
         var slug = this.$route.params.submission
@@ -239,14 +278,14 @@ methods:{
         
     },
 
-     	discard(){
+      discard(){
           this.editingValues(false)
-     		  let authorslug = this.$route.params.author
-     		  this.$router.push({path: `/dashboard/${authorslug}`})
-     	},
+          let authorslug = this.$route.params.author
+          this.$router.push({path: `/dashboard/${authorslug}`})
+      },
 
-     	submit(){
-     		  this.editingValues(false)
+      submit(){
+          this.editingValues(false)
           let authorslug = this.$route.params.author
 
           let data = new FormData()
@@ -257,11 +296,11 @@ methods:{
                  data.append(key,value)
 
           }
-     		  this.$store.dispatch('dashboard/makeSubmission',data)
+          this.$store.dispatch('dashboard/makeSubmission',data)
 
           this.$router.push({path: `/dashboard/${authorslug}`})
 
-     	},
+      },
 
        editingValues(val){
            this.editing.category = val
@@ -279,65 +318,65 @@ methods:{
 <style lang="stylus" scoped>
 
 .section-across 
-	margin: 0 -200px
+  margin: 0 -200px
 .main_link,.sub_link
-	color: red
-	text-decoration: none
-	list-style: none
+  color: red
+  text-decoration: none
+  list-style: none
 
 .main_link a::before,.sub_link a::before
-	content: "# "
-	margin-left: -20px 
+  content: "# "
+  margin-left: -20px 
 
 .main_link:hover,.sub_link:hover
-	color: grey
+  color: grey
 .sub_link
-	font-size: 18px
-	font-weight: 300
+  font-size: 18px
+  font-weight: 300
 .sub_link a
-	text-decoration: none
+  text-decoration: none
 .main_link
-	font-size: 24px
-	font-weight: 700
+  font-size: 24px
+  font-weight: 700
 p
-	line-height: 1.9
-	font-size: 18px
+  line-height: 1.9
+  font-size: 18px
 article, header
-	padding:25px 205px 50px 120px
+  padding:25px 205px 50px 120px
 header
-	margin-bottom: 15px
+  margin-bottom: 15px
 .anc::before
-	content: "#";
-	margin-left: -35px;
-	margin-bottom: -55px
-	position: absolute;
-	font-size: 28px;
-	color: #f4645f;
-	opacity: .6;
-	color: red
+  content: "#";
+  margin-left: -35px;
+  margin-bottom: -55px
+  position: absolute;
+  font-size: 28px;
+  color: #f4645f;
+  opacity: .6;
+  color: red
 a
-	text-decoration: none !important
+  text-decoration: none !important
 h2 a
-	color: black !important
+  color: black !important
 h4 a
-	color: black !important
+  color: black !important
 
 article h2:first-of-type
-	margin-top: -10px
-	margin-bottom: 10px
+  margin-top: -10px
+  margin-bottom: 10px
 
 article h2, article h4
-	margin-top: 20px
-	margin-bottom: 10px
+  margin-top: 20px
+  margin-bottom: 10px
 
 @media screen and (max-width: 1080px)
-	article, header
-		padding: 15px 2px 30px
-	p
-		line-height: 1.9
-		font-size: 16px
-	.main_link
-		font-size: 18px
-	.sub_link
-		font-size: 16px
+  article, header
+    padding: 15px 2px 30px
+  p
+    line-height: 1.9
+    font-size: 16px
+  .main_link
+    font-size: 18px
+  .sub_link
+    font-size: 16px
 </style>

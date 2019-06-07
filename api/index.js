@@ -230,3 +230,15 @@ export const AGENT_PROFILE_IMAGE_UPLOAD_URL = baseUrl + '/profile-img'
  * @return return
  */
  export const DASHBOARD_SUBMISSION_SUBMIT_URL = baseUrl + "/submit/submission"
+
+/**
+ * Route to  download submissions
+ *
+ * @param  param
+ * @return return
+ */
+ export const DASHBOARD_SUBMISSION_DOWNLOAD_URL = (slug) => {
+
+           return baseUrl + "/submission/" + slug + "/download"
+
+       }
