@@ -8,8 +8,8 @@
 
         <v-card-title primary-title>
           <div>
-            <span class="grey--text font-weight-bold">{{ item.category.title }} In:{{item.edition.title}}</span>
-            <div class="headline">{{ item.title }}</div>
+            <span class="grey--text font-weight-bold text-truncate">{{ item.category.title }} In:{{item.edition.title}}</span>
+            <div class="title  text-truncate">{{ item.title }}</div>
             <span class="grey--text"> by {{ item.author.name }}</span>
           </div>
         </v-card-title>

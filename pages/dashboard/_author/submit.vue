@@ -71,9 +71,9 @@
                </v-container>
 
                <v-card-actions>
-                 <v-btn @click="discard">Discard</v-btn>
+                 <v-btn @click="discard" color="red darken-4" class="white--text">BACK</v-btn>
 
-                 <v-btn primary @click="save">Submit</v-btn>
+                 <v-btn @click="save" color="green darken-4" class="white--text">Submit</v-btn>
                </v-card-actions>
              </v-card>
 

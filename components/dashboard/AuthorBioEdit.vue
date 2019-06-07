@@ -14,7 +14,7 @@
 		              </v-container>
 	              	<v-container>
 		              	<v-layout grid-xs-list wrap>
-			              	<v-flex xs12 md4>
+			              	<!-- <v-flex xs12 md4>
 			              		<div style="display:flex; justify-content: center">
 			              			<v-avatar
 			                       
@@ -29,10 +29,10 @@
 			                     </v-avatar>
 			              		</div>
 				              	
-		                     </v-flex>
-		                     <v-flex md8 xs12>
+		                     </v-flex> -->
+		                     <v-flex md12 xs12>
 			                     <v-card-text>
-
+                                     <h3> Edit Your Profile </h3>
 			                     	 <v-text-field label="Pen Name" autofocus v-if="editing.pen_name" @blur="editing.pen_name = false" outline v-model="profile.pen_name"></v-text-field>
 
                                      <h3 class="headline" v-else @click="editing.pen_name = true">{{ profile.pen_name }}</h3>
@@ -44,7 +44,7 @@
 
 					            	 <p  v-else @click="editing.bio = true">{{ profile.bio }}</p>
 
-					            	 <v-text-field label="Follow Link" v-model="profile.contacts" outline ></v-text-field>
+					            	 <!-- <v-text-field label="Follow Link" v-model="profile.contacts" outline ></v-text-field> -->
 					            	 
 					            	
 			                     </v-card-text>
@@ -72,14 +72,14 @@ data() {
 		profile: { 
 			  bio: "Click here to write about yourself here",
 		      pen_name: this.$store.getters['auth/getUser'].name,
-		      contacts: "",
-		      profile_img:""
+		      // contacts: "",
+		      // profile_img:""
 		  },
 
 		 editing: {
 		 	bio: false,
 		 	pen_name: false,
-		 	contacts: false,
+		 	// contacts: false,
 		 },
 
 		 showSave: false

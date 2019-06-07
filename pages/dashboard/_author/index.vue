@@ -14,7 +14,7 @@
                   <v-container
 
                             v-for="(item,index) in submissions"
-                               @click="edit(item.slug)"
+                               
                                class="hover"
                                :key="index"
                    >
@@ -108,11 +108,11 @@ methods:{
           this.$router.push({path: `/dashboard/${author}/submit`})
     },
 
-    edit(slug){
+    // edit(slug){
            
-           let author = this.$route.params.author
-           this.$router.push({path: `/dashboard/${author}/${slug}`})
-    }
+    //        let author = this.$route.params.author
+    //        this.$router.push({path: `/dashboard/${author}/${slug}`})
+    // }
 
 },
 

@@ -6,7 +6,7 @@
                 <v-card flat  justify-center>
                   <v-container>
                     <v-layout grid-list-xs wrap>
-                      <v-flex xs4 md4>
+                      <!-- <v-flex xs4 md4>
                         <div style="display:flex; justify-content: center">
                           <v-avatar
                                
@@ -20,8 +20,8 @@
                               > </v-img>
                              </v-avatar>
                           </div>
-                         </v-flex>
-                         <v-flex md8 xs8>
+                         </v-flex> -->
+                         <v-flex md12 xs12>
                            <v-card-text>
                             <h3 class="headline"> Emeka Obi</h3>
                         <p>
@@ -29,12 +29,12 @@
                          </p>
                            </v-card-text>
                        </v-flex>
-                       <v-flex xs12>
+                      <!--  <v-flex xs12>
                           <div style="display:flex; justify-content: flex-end">
                           <v-btn outline small class="mt-2">Follow</v-btn>
                             
                           </div>
-                       </v-flex>
+                       </v-flex> -->
                  </v-layout>
                </v-container>
                 </v-card>
